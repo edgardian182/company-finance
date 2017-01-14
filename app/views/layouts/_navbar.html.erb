@@ -16,6 +16,15 @@
         <li class="<%= 'active' if @tab == :dashboard %>"><%= link_to "Dashboard", root_path %></li>
         <li class="<%= 'active' if @tab == :expenses %>"><%= link_to "Expenses", expenses_path %></li>
       </ul>
+
+      <% if user_signed_in? %>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+          </li>
+        </ul>
+      <% end %>
+      
     </div>
   </div>
 </nav>
