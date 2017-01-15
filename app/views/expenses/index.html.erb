@@ -56,32 +56,35 @@
           <tr>
             <th class="text-center">Día</th>
             <th>Concepto</th>
-            <th class="text-right">Categoría</th>
+            <th class="text-center">Categoría</th>
             <th class="text-right">Valor</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="date">
-              <div class="day">24</div>
-              <div class="month">Apr</div>
-            </td>
-            <td>
-              <div>
-                <span class="type">Purchase</span>
-              </div>
-              <div>
-                <span class="concept">Example concept</span>
-              </div>
-            </td>
-            <td class="category text-right">Restauratns</td>
-            <td class="text-right" style="width: 170px;">
-              <div class="amount">$1,000,000</div>
-              <div class="actions">
-                <%= link_to "<span class='glyphicon glyphicon-edit'></span> Edit".html_safe, edit_expense_path(expense), remote: true %>
-                <%= link_to "<span class='glyphicon glyphicon-trash'></span> Delete".html_safe, expense_path(expense), method: :delete, data: {confirm: "Are you sure you want to delete this expense?"}, remote: true %>
-            </td>
-          </tr>
+
+          <% @expenses.each do |expense| %>
+            <tr>
+              <td class="date">
+                <div class="day"><%= expense.created_at.day %></div>
+                <div class="month"><%= Date::MONTHNAMES[expense.created_at.month] %></div>
+              </td>
+              <td>
+                <div>
+                  <span class="type"><%= expense.type.name %></span>
+                </div>
+                <div>
+                  <span class="concept"><%= expense.concept %></span>
+                </div>
+              </td>
+              <td class="category text-center"><%= expense.category.name %></td>
+              <td class="text-right" style="width: 170px;">
+                <div class="amount"><%= number_to_currency(expense.amount) %></div>
+                <div class="actions">
+                  <%= link_to "<span class='glyphicon glyphicon-edit'></span> Edit".html_safe, edit_expense_path(expense), remote: true %>
+                  <%= link_to "<span class='glyphicon glyphicon-trash'></span> Delete".html_safe, expense_path(expense), method: :delete, data: {confirm: "Are you sure you want to delete this expense?"}, remote: true %>
+              </td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
