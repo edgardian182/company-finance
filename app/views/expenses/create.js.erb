@@ -1,0 +1,11 @@
+<% if @expense.errors.empty? %>
+  // add the row to the table, show alert and hide modal
+
+  // Selecciona la tabla de la pagin actual (index.html.erb de Expenses) y le agrega la información del _row.html.erb
+  $('table tbody').append(' <%= j render "row", expense: @expense %>');
+  $('.alert-success').html("El producto ha sido creado con éxito").show();
+  $('#newExpense').modal('hide');
+<% else %>
+  // show first error
+  alert('<%= @expense.errors.full_messages[0] %>');
+<% end %>

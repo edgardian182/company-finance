@@ -11,6 +11,12 @@ TRICKS:
   - Crea vista new.js.erb
   - Crea _modalForm.html.erb
 
+  - FORM
+    - remote: true
+    - create action and save in expenses_controller.rb
+    - create.js.erb
+      => Llama un partial _row.html.erb donde esta la fila con la información recien creada para adjuntarle a la tabla actual
+
 
 ## README
 
