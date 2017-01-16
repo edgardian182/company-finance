@@ -1,0 +1,4 @@
+// Se usa el evento on('hidden.bs.modal') porque sin el no se estaba eliminando el Modal al editar nuevamente el producto
+$("<%= j render 'modalForm' %>").on('hidden.bs.modal', function (e) {
+  $(this).remove();
+}).modal();

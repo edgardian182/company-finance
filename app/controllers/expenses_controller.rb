@@ -1,4 +1,6 @@
 class ExpensesController < ApplicationController
+  before_action :get_expense, only: [:edit,:update,:destroy]
+
   def index
     @tab = :expenses
     @expenses = Expense.all
@@ -14,10 +16,21 @@ class ExpensesController < ApplicationController
     @expense.save
   end
 
+  def edit
+  end
+
+  def update
+    @expense.update(expenses_params)
+  end
+
 
   private
   def expenses_params
     params.require(:expense).permit(:concept,:amount,:date,:category_id,:type_id)
+  end
+
+  def get_expense
+    @expense = Expense.find(params[:id])
   end
 
 end

@@ -17,6 +17,8 @@ TRICKS:
     - create.js.erb
       => Llama un partial _row.html.erb donde esta la fila con la información recien creada para adjuntarle a la tabla actual
 
+      *** En la acción EDIT fue necesario agregar un evento en edit.js.erb para editar varias veces un mismo gasto
+
 
 ## README
 
