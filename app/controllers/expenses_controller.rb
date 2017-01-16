@@ -23,6 +23,10 @@ class ExpensesController < ApplicationController
     @expense.update(expenses_params)
   end
 
+  def destroy
+    @expense.destroy
+  end
+
 
   private
   def expenses_params
