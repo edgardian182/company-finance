@@ -3,6 +3,14 @@
 
   // Selecciona la tabla de la pagin actual (index.html.erb de Expenses) y le agrega la información del _row.html.erb
   $('table tbody').append(' <%= j render "row", expense: @expense %>');
+
+  // Actualizamos el valor promedio
+  $('#average').html("<%= number_to_currency(@expenses.average(:amount)) %>");
+  // Cuenta el numero de transacciones
+  $('#transactions').html("<%= @expenses.count %>");
+  // Actualizamos el total
+  $('#total').html("<%= number_to_currency(@expenses.sum(:amount)) %>")
+
   $('.alert-success').html("The product has been created successfully").show();
   $('#newExpense').modal('hide');
 <% else %>

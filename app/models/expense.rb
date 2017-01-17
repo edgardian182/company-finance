@@ -17,4 +17,9 @@ class Expense < ApplicationRecord
   belongs_to :user
   belongs_to :category
   belongs_to :type
+
+
+  # Carga Expenses junto a Types y Categories asociados a ellos en una sola consulta
+  Expense.includes(:type, :category)
+
 end

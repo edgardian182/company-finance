@@ -1,3 +1,5 @@
 // El prefijo j sirve para escapar el código HTML y que sea una cadena de JavaScript válida.
 
-$("<%= j render 'modalForm' %>").modal();
+$("<%= j render 'modalForm' %>").on('hidden.bs.modal', function (e) {
+  $(this).remove();
+}).modal();

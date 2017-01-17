@@ -2,8 +2,12 @@
   // add the row to the table, show alert and hide modal
 
   // Selecciona la tabla de la pagin actual (index.html.erb de Expenses) y le agrega la información del _row.html.erb
-  // $('table tbody').append(' <%= j render "row", expense: @expense %>');
   $('table tbody').find('#<%= @expense.id %>').replaceWith("<%= j render 'row', expense: @expense %>");
+  // Actualizamos el valor promedio al hacer Update
+  $('#average').html("<%= number_to_currency(@expenses.average(:amount)) %>")
+  // Actualizamos el total
+  $('#total').html("<%= number_to_currency(@expenses.sum(:amount)) %>")
+
   $('.alert-success').html("The product has been updated successfully").show();
   $('#newExpense').modal('hide');
 <% else %>

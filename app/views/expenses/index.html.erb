@@ -3,30 +3,30 @@
     <div class="col-md-3">
       <h4 class="filter-header">Transaction Type <span>Choose to filter</span></h4>
       <div class="list-group filter-type">
-        <a href="#" class="list-group-item">Purchase</a>
-        <a href="#" class="list-group-item">Withdrawal</a>
-        <!-- more transaction types -->
+        <% @types.each do |type| %>
+          <a href="#" class="list-group-item"><%= type.name %></a>
+        <% end %>
       </div>
 
-      <h4 class="filter-header">Categoría <span>Selecciona para filtrar</span></h4>
+      <h4 class="filter-header">Categories <span>Choose to filter</span></h4>
       <div class="list-group filter-type">
-        <a href="#" class="list-group-item">Restaurants</a>
-        <a href="#" class="list-group-item">Car</a>
-        <!-- more categories  -->
+        <% @categories.each do |category| %>
+          <a href="#" class="list-group-item"><%= category.name %></a>
+        <% end %>
       </div>
     </div>
     <div class="col-md-9 index-data">
       <div class="row" style="margin-top: 10px;">
         <div class="summary-box col-md-4 text-center">
-          <div class="summary-value">$2,500,000</div>
+          <div class="summary-value" id="total"><%= number_to_currency(@expenses.sum(:amount)) %></div>
           <div class="summary-label">Total</div>
         </diV>
         <div class="summary-box col-md-4 text-center">
-          <div class="summary-value">2</div>
+          <div class="summary-value" id="transactions"><%= @expenses.count %></div>
           <div class="summary-label">Transactions</div>
         </div>
         <div class="summary-box col-md-4 text-center">
-          <div class="summary-value">$1,000,000</div>
+          <div class="summary-value" id="average"><%= number_to_currency(@expenses.average(:amount)) %></div>
           <div class="summary-label">Average</div>
         </div>
       </div>

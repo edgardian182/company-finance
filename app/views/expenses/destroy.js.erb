@@ -1,1 +1,8 @@
 $('table tbody').find('#<%= @expense.id %>').remove();
+
+// Actualizamos el valor promedio
+$('#average').html("<%= number_to_currency(@expenses.average(:amount)) %>");
+// Cuenta el numero de transacciones
+$('#transactions').html("<%= @expenses.count %>");
+// Actualizamos el total
+$('#total').html("<%= number_to_currency(@expenses.sum(:amount)) %>")

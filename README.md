@@ -19,6 +19,11 @@ TRICKS:
 
       *** En la acción EDIT fue necesario agregar un evento en edit.js.erb para editar varias veces un mismo gasto
 
+3. FILTROS
+- En un filtro se deben recibir las variables que filtran en un FORM
+  * Por TYPE, CATEGORY, DATE
+
+
 
 ## README
 
