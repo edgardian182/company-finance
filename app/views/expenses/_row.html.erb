@@ -1,11 +1,11 @@
 <tr id="<%= expense.id %>">
   <td class="date">
-    <div class="day"><%= expense.created_at.day %></div>
-    <div class="month"><%= Date::MONTHNAMES[expense.created_at.month] %></div>
+    <div class="day"><%= expense.date.day %></div>
+    <div class="month"><%= Date::MONTHNAMES[expense.date.month] %></div>
   </td>
   <td>
     <div>
-      <span class="type"><%=expense.type.name %></span>
+      <span class="type"><%= expense.type.name %></span>
     </div>
     <div>
       <span class="concept"><%= expense.concept %></span>
@@ -15,7 +15,7 @@
   <td class="text-right" style="width: 170px;">
     <div class="amount"><%= number_to_currency(expense.amount) %></div>
     <div class="actions">
-      <%= link_to "<span class='glyphicon glyphicon-edit'></span> Edit".html_safe, edit_expense_path(expense), remote: true %>
-      <%= link_to "<span class='glyphicon glyphicon-trash'></span> Delete".html_safe, expense_path(expense), method: :delete, data: {confirm: "Are you sure you want to delete this expense?"}, remote: true %>
+      <%= link_to "<span class='glyphicon glyphicon-edit'></span> Editar".html_safe, edit_expense_path(expense, params: params), remote: true %>
+      <%= link_to "<span class='glyphicon glyphicon-trash'></span> Eliminar".html_safe, expense_path(expense, params: params), method: :delete, data: {confirm: "Estas seguro que deseas eliminar este gasto?"}, remote: true %>
   </td>
 </tr>

@@ -23,6 +23,7 @@ TRICKS:
 - En un filtro se deben recibir las variables que filtran en un FORM
   * Por TYPE, CATEGORY, DATE
 
+- 
 
 
 ## README

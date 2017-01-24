@@ -1,12 +1,14 @@
 class ExpensesController < ApplicationController
   before_action :get_expense, only: [:edit,:update,:destroy]
   before_action :set_expenses, only: [:index, :create, :update, :destroy]
+  before_action :send_parameters, only: [:edit, :new, :update]
 
   def index
     @tab = :expenses
     # @expenses = Expense.all
     @types = Type.all
-    @categories = Category.all
+    @categories = Category.all.order('name')
+
   end
 
   def new
@@ -21,9 +23,11 @@ class ExpensesController < ApplicationController
   end
 
   def edit
+    # debugger
   end
 
   def update
+    # debugger
     # @expenses = Expense.all  # Se usa para actualizar el Average
     @expense.update(expenses_params)
   end
@@ -44,7 +48,15 @@ class ExpensesController < ApplicationController
   end
 
   def set_expenses
-    @expenses = Expense.all
+    @expenses = Expense.all.order("date")
+
+    if params[:type].present? && params[:type] != ""
+      @expenses = @expenses.where("type_id = ?", params[:type]);
+    end
+  end
+
+  def send_parameters
+    @parameters = params
   end
 
 end
