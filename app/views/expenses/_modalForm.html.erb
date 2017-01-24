@@ -16,13 +16,13 @@
               <div class="col-xs-6">
                 <div class="form-group">
                   <%= f.label :tipo %>
-                  <%= f.collection_select :type_id, Type.all, :id, :name, {selected: 1}, {class: "form-control"} %>
+                  <%= f.collection_select :type_id, Type.all, :id, :name, {selected: @expense.type_id}, {class: "form-control"} %>
                 </div>
               </div>
               <div class="col-xs-6">
                 <div class="form-group">
                   <%= f.label :fecha %>
-                  <p><%= f.date_select :date, {:start_year => 2017}, {:class => "form-control", :style => "display: inline-block; width: auto"} %></p>
+                  <p><%= f.date_select :date, {start_year: 2017}, {:class => "form-control", :style => "display: inline-block; width: auto"} %></p>
                 </div>
               </div>
             </div>
@@ -36,7 +36,7 @@
               <div class="col-xs-6">
                 <div class="form-group">
                   <%= f.label :categoría %>
-                  <%= f.collection_select :category_id, Category.all, :id, :name, { selected: 1}, {class: "form-control"} %>
+                  <%= f.collection_select :category_id, Category.all, :id, :name, { selected: @expense.category_id}, {class: "form-control"} %>
                 </div>
               </div>
               <div class="col-xs-6">
