@@ -15,8 +15,9 @@
       <ul class="nav navbar-nav">
         <li class="<%= 'active' if @tab == :dashboard %>"><%= link_to "Dashboard", root_path %></li>
         <li class="<%= 'active' if @tab == :expenses %>"><%= link_to "Gastos", expenses_path %></li>
+        <li class="<%= 'active' if @tab == :incomes %>"><%= link_to "Ingresos", expenses_path %></li>
+        <li class="<%= 'active' if @tab == :sales %>"><%= link_to "Pedidos", "#" %></li>
         <li class="<%= 'active' if @tab == :clients %>"><%= link_to "Clientes", "#" %></li>
-        <li class="<%= 'active' if @tab == :orders %>"><%= link_to "Pedidos", "#" %></li>
         <li class="<%= 'active' if @tab == :sellers %>"><%= link_to "Vendedores", "#" %></li>
         <li class="<%= 'active' if @tab == :suppliers %>"><%= link_to "Proveedores", "#" %></li>
       </ul>
