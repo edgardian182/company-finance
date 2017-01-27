@@ -12,6 +12,7 @@ TRICKS:
   - Crea _modalForm.html.erb
 
   - FORM
+  - NOTA: Si se van a subir archivos agregar al form authenticity_token: true y en el controlador respond_to do |format| para quesea enviado por HTML
     - remote: true
     - create action and save in expenses_controller.rb
     - create.js.erb

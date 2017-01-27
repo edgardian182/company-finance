@@ -19,7 +19,19 @@ class ExpensesController < ApplicationController
     # @expenses = Expense.all  # Se usa para actualizar el Average
     @expense = Expense.new(expenses_params)
     @expense.user = current_user
-    @expense.save
+
+    respond_to do |format|
+      if @expense.save
+        format.html { redirect_to expenses_path, notice: 'Expense was successfully created.' }
+        # format.json { render :show, status: :created, location: @client }
+        format.js {}
+      else
+        format.html { render :new }
+        # format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+    end
+
+
   end
 
   def edit
@@ -29,7 +41,14 @@ class ExpensesController < ApplicationController
   def update
     # debugger
     # @expenses = Expense.all  # Se usa para actualizar el Average
-    @expense.update(expenses_params)
+    respond_to do |format|
+      if @expense.update(expenses_params)
+        format.html { redirect_to expenses_path, notice: 'Expense was successfully updated.' }
+        format.js {}
+      else
+        format.html { render :new }
+      end
+    end
   end
 
   def destroy
