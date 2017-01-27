@@ -27,22 +27,60 @@
               </div>
             </div>
             
-            <div class="form-group">
-              <%= f.label :concepto %>
-              <%= f.text_field :concept, class: "form-control" %>
-            </div>
-            
             <div class="row">
-              <div class="col-xs-6">
+              <div class="col-xs-4">
                 <div class="form-group">
                   <%= f.label :categoría %>
                   <%= f.collection_select :category_id, Category.all, :id, :name, { selected: @expense.category_id}, {class: "form-control"} %>
                 </div>
               </div>
-              <div class="col-xs-6">
+              <div class="col-xs-4">
+                <div class="form-group">
+                  <%= f.label :producto %>
+                  <%= f.collection_select :material, Material.all, :id, :name, {selected: @expense.material, include_blank: true}, {class: "form-control"} %>
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="form-group">
+                  <%= f.label :cantidad %>
+                  <%= f.text_field :quantity, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="form-group">
+                  <%= f.label :medida %>
+                  <%= f.select :measure, options_for_select([['g','g'],['L','L'],['lb','lb'],['m','m']]), {include_blank: true}, {class: "form-control"}  %>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="form-group">
+              <%= f.label "Concepto/Notas" %>
+              <%= f.text_field :concept, class: "form-control" %>
+            </div>
+            
+            <div class="row">
+              <div class="col-xs-4">
+                <div class="form-group">
+                  <%= f.label :fondo %>
+                  <p>
+                    <%= f.collection_radio_buttons :fund_id, Fund.all, :id, :name, {checked: Fund.first.id}, {} do |b| %>
+                      <%= b.label {b.radio_button + " " + b.text} %><br>
+                    <% end %>
+                  </p>
+                </div>
+              </div>
+              <div class="col-xs-8">
                 <div class="form-group">
                   <%= f.label :valor %>
                   <%= f.text_field :amount, class: "form-control text-right", placeholder: "0" %>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="form-group">
+                  <%= f.label :factura %>
+                  <%= f.file_field :invoice, title: "Factura" %>
                 </div>
               </div>
             </div>

@@ -1,16 +1,14 @@
 # == Schema Information
 #
-# Table name: categories
+# Table name: funds
 #
 #  id         :integer          not null, primary key
 #  name       :string
+#  amount     :decimal(, )
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Category < ApplicationRecord
-
+class Fund < ApplicationRecord
   has_many :expenses
-  has_many :materials
-
 end

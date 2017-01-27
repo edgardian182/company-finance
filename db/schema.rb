@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170115101552) do
+ActiveRecord::Schema.define(version: 20170127122425) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -26,13 +26,40 @@ ActiveRecord::Schema.define(version: 20170115101552) do
     t.integer  "user_id"
     t.integer  "category_id"
     t.integer  "type_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "product_id"
+    t.float    "quantity"
+    t.string   "measure"
+    t.integer  "fund_id"
+    t.string   "invoice_file_name"
+    t.string   "invoice_content_type"
+    t.integer  "invoice_file_size"
+    t.datetime "invoice_updated_at"
+    t.string   "material"
+  end
+
+  add_index "expenses", ["category_id"], name: "index_expenses_on_category_id"
+  add_index "expenses", ["fund_id"], name: "index_expenses_on_fund_id"
+  add_index "expenses", ["product_id"], name: "index_expenses_on_product_id"
+  add_index "expenses", ["type_id"], name: "index_expenses_on_type_id"
+  add_index "expenses", ["user_id"], name: "index_expenses_on_user_id"
+
+  create_table "funds", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "category_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "expenses", ["category_id"], name: "index_expenses_on_category_id"
-  add_index "expenses", ["type_id"], name: "index_expenses_on_type_id"
-  add_index "expenses", ["user_id"], name: "index_expenses_on_user_id"
+  add_index "materials", ["category_id"], name: "index_materials_on_category_id"
 
   create_table "types", force: :cascade do |t|
     t.string   "name"

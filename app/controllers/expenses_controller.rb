@@ -40,7 +40,7 @@ class ExpensesController < ApplicationController
 
   private
   def expenses_params
-    params.require(:expense).permit(:concept,:amount,:date,:category_id,:type_id)
+    params.require(:expense).permit(:concept,:amount,:date,:category_id,:type_id,:invoice,:fund_id,:measure,:quantity,:material)
   end
 
   def get_expense
