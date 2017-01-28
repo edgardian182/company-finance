@@ -1,0 +1,22 @@
+<div class="modal fade" id="invoice" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        FACTURA <%= expense.id %>
+      </div>
+      <div class="modal-body text-center">
+        <% if expense.invoice.exists? %>
+          <%= image_tag expense.invoice.url(:large) %>
+        <% end %>
+        <br>
+        <br>
+        <p><span style="font-weight:bold">Fecha:</span> <%= expense.date %></p>
+        <p><span style="font-weight:bold">Concepto:</span> <%= expense.material %> <%= expense.quantity %> <%= expense.measure %> <%= expense.concept %></p>
+        <p><span style="font-weight:bold">Valor:</span> <%= number_to_currency(expense.amount) %></p>
+      </div>
+    </div>
+
+  </div>
+</div>

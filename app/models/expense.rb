@@ -30,7 +30,7 @@ class Expense < ApplicationRecord
   # belongs_to :material
 
 
-  has_attached_file :invoice, styles: {medium: "300x300", thumb: "100x100>"}
+  has_attached_file :invoice, styles: {medium: "300x300", thumb: "100x100>", large: "450x1200"}
 
 
   validates_attachment_content_type :invoice, content_type: /\Aimage\/.*\Z/
