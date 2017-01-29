@@ -1,35 +1,59 @@
 <div class="container">
   <div class="row">
     
-      <table id="clients-table" class="table table-hover" style="margin-top: 20px;">
-        <thead>
-          <tr>
-            <th class="text-center">Nombre</th>
-            <th>Teléfono</th>
-            <th class="text-center">Ciudad</th>
-            <th class="text-right">Referencia</th>
-            <th class="text-right">Nº Pedidos</th>
-            <th class="text-right">Ultimo Pedido</th>
-            <th class="text-right">Vendedor</th>
-            <th class="text-right">Estado</th>
-          </tr>
-        </thead>
-        <tbody>
+    <%= form_tag clients_path, remote:true, method: :get, id:"client-lookup-form" do %>
+      <div class="form-group">
+        <div class="col-xs-6">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <%= button_tag(type: :submit, class:"btn btn-info") do %>
+                <span class="glyphicon glyphicon-search"></span>
+              <% end %>
+            </span>
+            <%= text_field_tag :name, params[:search], placeholder: "Buscar cliente", autofocus:true, class:"form-control" %> 
+          </div>
+        </div>
+      </div>
+    <% end %>
 
-          <% @clients.each do |client| %>
-            <!-- <%= render 'row', expense: expense %> -->
-            <td><%= client.name %> <%= client.lastname %></td>
-            <td><%= client.phone %></td>
-            <td><%= client.city %></td>
-            <td><%= client.reference %></td>
-            <td><%= client.orders.count %></td>
-            <td><%= client.orders.last.date %></td>
-            <td><%= client.user.name %> <%= client.user.lastname %></td>
-            <td><%= "Estado cliente" %></td>
-          <% end %>
-        </tbody>
-      </table>
+
+    <div class="col-xs-6 text-right">
+      <%= link_to "<span class='glyphicon glyphicon-plus'></span> Agregar cliente".html_safe, new_client_path(params: params), class: "btn btn-success", remote: true %>
     </div>
+    <br><br><br>
 
+    <table id="clients-table" class="table table-hover" style="margin-top: 20px;">
+      <thead>
+        <tr>
+          <th class="">Nombre</th>
+          <th>Teléfono</th>
+          <th class="">Ciudad</th>
+          <th class="">Referencia</th>
+          <th class="">Nº Pedidos</th>
+          <th class="">Ultimo Pedido</th>
+          <th class="">Vendedor</th>
+          <th class="">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @clients.each do |client| %>
+          <td><%= client.name %> <%= client.lastname %></td>
+          <td><%= client.phone %></td>
+          <td><%= client.city %></td>
+          <td><%= client.reference %></td>
+          <td><%= client.orders.count %></td>
+          <td>
+            <% if client.orders.count > 0 %>
+            <%= client.orders.last.date  %>
+            <% else %>
+            <%= "NN" %>
+            <% end %>
+          </td>
+          <td><%= client.user.name %> <%= client.user.lastname %></td>
+          <td><%= "Estado cliente" %></td>
+        <% end %>
+      </tbody>
+    </table>
+  
   </div>
 </div>

@@ -18,6 +18,12 @@
 #  superadmin_role        :boolean          default(FALSE)
 #  supervisor_role        :boolean          default(FALSE)
 #  user_role              :boolean          default(TRUE)
+#  name                   :string
+#  lastname               :string
+#  address                :string
+#  phone                  :string
+#  city                   :string
+#  type                   :integer
 #
 
 class User < ApplicationRecord
