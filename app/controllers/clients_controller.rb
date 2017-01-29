@@ -46,6 +46,7 @@ class ClientsController < ApplicationController
   end
 
   def destroy
+    @client.destroy
   end
 
   private 
