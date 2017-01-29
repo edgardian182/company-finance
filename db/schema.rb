@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170129130122) do
+ActiveRecord::Schema.define(version: 20170129141554) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -88,9 +88,11 @@ ActiveRecord::Schema.define(version: 20170129130122) do
     t.integer  "client_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "user_id"
   end
 
   add_index "orders", ["client_id"], name: "index_orders_on_client_id"
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "types", force: :cascade do |t|
     t.string   "name"
@@ -114,6 +116,12 @@ ActiveRecord::Schema.define(version: 20170129130122) do
     t.boolean  "superadmin_role",        default: false
     t.boolean  "supervisor_role",        default: false
     t.boolean  "user_role",              default: true
+    t.string   "name"
+    t.string   "lastname"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "city"
+    t.integer  "type"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
