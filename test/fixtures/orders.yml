@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  state: 1
+  date: 2017-01-29
+  amount: 9.99
+  reference: MyString
+  paid: false
+  debt: 9.99
+  delivered_date: 2017-01-29
+  pay_date: 2017-01-29
+  client: one
+
+two:
+  state: 1
+  date: 2017-01-29
+  amount: 9.99
+  reference: MyString
+  paid: false
+  debt: 9.99
+  delivered_date: 2017-01-29
+  pay_date: 2017-01-29
+  client: two
