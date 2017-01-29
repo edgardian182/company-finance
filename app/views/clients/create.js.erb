@@ -1,6 +1,6 @@
 <% if @client.errors.empty? %>
 
-  $('table tbody').append(' <%= j render "row", client: @client ');
+  $('table tbody').append(' <%= j render "row", client: @client %>');
   $('#newClient').modal('hide');
 <% else %>
   alert('<%= @client.errors.full_messages[0] %>');
