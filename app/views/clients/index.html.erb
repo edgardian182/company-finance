@@ -28,7 +28,6 @@
           <th class="">Nombre</th>
           <th>Teléfono</th>
           <th class="">Ciudad</th>
-          <th class="">Referencia</th>
           <th class="">Nº Pedidos</th>
           <th class="">Ultimo Pedido</th>
           <th class="">Vendedor</th>
@@ -37,20 +36,7 @@
       </thead>
       <tbody>
         <% @clients.each do |client| %>
-          <td><%= client.name %> <%= client.lastname %></td>
-          <td><%= client.phone %></td>
-          <td><%= client.city %></td>
-          <td><%= client.reference %></td>
-          <td><%= client.orders.count %></td>
-          <td>
-            <% if client.orders.count > 0 %>
-            <%= client.orders.last.date  %>
-            <% else %>
-            <%= "NN" %>
-            <% end %>
-          </td>
-          <td><%= client.user.name %> <%= client.user.lastname %></td>
-          <td><%= "Estado cliente" %></td>
+          <%= render 'row', client: client %>
         <% end %>
       </tbody>
     </table>

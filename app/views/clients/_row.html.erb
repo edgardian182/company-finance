@@ -1,0 +1,33 @@
+<tr id="<%= client.id %>">
+  
+  <td>
+    <div>
+      <span class="type"> <%= client.name %> <%= client.lastname %></span>
+    </div>
+    <div>
+      <span class="concept">
+        <span style="color: #90C9CE"><%= client.reference %></span> 
+      </span>
+    </div>
+  </td>
+  <td><%= client.phone %></td>
+  <td><%= client.city %></td>
+  <td><%= client.orders.count %></td>
+  <td>
+    <% if client.orders.count > 0 %>
+    <%= client.orders.last.date  %>
+    <% else %>
+    <%= "NN" %>
+    <% end %>
+  </td>
+  <td><%= client.user.name %> <%= client.user.lastname %></td>
+  <td>
+    <div><%= "Estado cliente" %></div>
+    <div class="actions">
+      <%= link_to "<span class='glyphicon glyphicon-eye-open'></span>".html_safe,client_path(client), remote: true %>
+      <%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_client_path(client), remote: true %>
+      <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, client_path(client), method: :delete, data: {confirm: "Estas seguro que deseas eliminar este cliente?"}, remote: true %>
+    </div>
+  </td>
+
+</tr>

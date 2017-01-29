@@ -20,5 +20,6 @@
       <%= link_to "<span class='glyphicon glyphicon-eye-open'></span>".html_safe,expense_path(expense, params: params), remote: true %>
       <%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_expense_path(expense, params: params), remote: true %>
       <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, expense_path(expense, params: params), method: :delete, data: {confirm: "Estas seguro que deseas eliminar este gasto?"}, remote: true %>
+    </div>
   </td>
 </tr>
