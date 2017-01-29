@@ -11,13 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170128202632) do
+ActiveRecord::Schema.define(version: 20170129130122) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "clients", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "lastname"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "city"
+    t.string   "reference"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "clients", ["user_id"], name: "index_clients_on_user_id"
 
   create_table "expenses", force: :cascade do |t|
     t.string   "concept"
@@ -60,6 +75,22 @@ ActiveRecord::Schema.define(version: 20170128202632) do
   end
 
   add_index "materials", ["category_id"], name: "index_materials_on_category_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "state"
+    t.date     "date"
+    t.decimal  "amount"
+    t.string   "reference"
+    t.boolean  "paid"
+    t.decimal  "debt"
+    t.date     "delivered_date"
+    t.date     "pay_date"
+    t.integer  "client_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "orders", ["client_id"], name: "index_orders_on_client_id"
 
   create_table "types", force: :cascade do |t|
     t.string   "name"

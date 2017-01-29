@@ -15,6 +15,9 @@
 #  last_sign_in_ip        :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  superadmin_role        :boolean          default(FALSE)
+#  supervisor_role        :boolean          default(FALSE)
+#  user_role              :boolean          default(TRUE)
 #
 
 class User < ApplicationRecord
@@ -23,4 +26,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
   has_many :expenses
+  has_many :clients
+  has_many :orders
 end
