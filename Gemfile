@@ -34,6 +34,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'devise-bootstrap-views'
 
+gem 'cancan'
+
 gem 'annotate'
 
 gem "paperclip", "~> 5.0.0"
