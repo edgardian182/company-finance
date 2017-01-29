@@ -1,0 +1,45 @@
+<div class="modal fade" id="client" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        Cliente <%= client.id %>
+      </div>
+      <div class="modal-body text-center">
+
+        <br>
+        <br>
+        <h3 class="">Datos de Contacto</h3>
+        <p><span style="font-weight:bold">Nombre:</span> <%= client.name %></p>
+        <p><span style="font-weight:bold">Apellido:</span> <%= client.lastname %></p>
+        <p><span style="font-weight:bold">Celular:</span> <%= client.phone %></p>
+        <p><span style="font-weight:bold">Dirección:</span> <%= client.address %></p>
+        <p><span style="font-weight:bold">Ciudad:</span> <%= client.city %></p>
+        <p><span style="font-weight:bold">Email:</span> <%= client.email %></p>
+        <p><span style="font-weight:bold">Referencia:</span> <%= client.reference %></p>
+        <br><br>
+        <h3>Datos de Venta</h3>
+        <p><span style="font-weight:bold">Nº de Pedidos:</span> <%= client.orders.count %></p>
+        <p><span style="font-weight:bold">Último Pedido:</span> 
+          <% if client.orders.count > 0 %>
+          <%= client.orders.last.date  %>
+          <% else %>
+          <%= "NN" %>
+          <% end %>
+        </p>
+        <p><span style="font-weight:bold">Debe:</span> 
+          <% if client.orders.count > 0 %>
+          <% deuda = 0 %>
+          <% client.orders.each{|o| deuda += o.debt }  %>
+          <%= deuda  %>
+          <% else %>
+          <%= "NN" %>
+          <% end %>
+        </p>
+        <p><span style="font-weight:bold">Vendedor:</span> <%= client.user.name %> <%= client.user.lastname %></p>
+      </div>
+    </div>
+
+  </div>
+</div>
