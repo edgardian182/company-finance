@@ -1,5 +1,5 @@
 <% if @order.errors.empty? %>
-  // $('table tbody').append(' <%= j render "row", order: @order %>');
+  $('table tbody').find('#<%= @client.id %>').replaceWith(' <%= j render "clients/row", client: @client %>');
   $('#newOrder').modal('hide');
 <% else %>
   alert('<%= @order.errors.full_messages[0] %>');

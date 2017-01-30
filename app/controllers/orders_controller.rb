@@ -11,6 +11,8 @@ class OrdersController < ApplicationController
   end
 
   def create
+    @client = Client.find(params[:client_id])
+
     @order = Order.new(order_params)
     @order.user = current_user
     @order.client_id = params[:client_id]
