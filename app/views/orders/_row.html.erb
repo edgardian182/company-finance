@@ -1,0 +1,19 @@
+<tr id="<%= order.id %>">
+  
+  <td><%= order.date %></td>
+  <td><%= order.client.name %> <%= order.client.lastname %></td>
+  <td><%= order.delivered_date %></td>
+  <td><%= order.pay_date %></td>
+  <td><%= order.amount %></td>
+  <td><%= order.debt %></td>
+  <td><%= order.user.name %> <%= order.user.lastname %></td>
+  <td>
+    <div><%= order.state %></div>
+    <div class="actions">
+      <%= link_to "<span class='glyphicon glyphicon-eye-open'></span>".html_safe,order_path(order), remote: true %>
+      <%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_order_path(order), remote: true %>
+      <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, order_path(order), method: :delete, data: {confirm: "Estas seguro que deseas eliminar esta orden?"}, remote: true %>
+    </div>
+  </td>
+
+</tr>

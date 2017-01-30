@@ -1,0 +1,82 @@
+<div class="modal fade" id="newOrder" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+        ORDEN
+
+      </div>
+
+      <%= form_for @order, remote: true, authenticity_token: true do |f| %>
+        <div class="modal-body">
+            
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label :estado %>
+                <%= f.select :state, Order.states.keys.to_a, {class: "form-control"}  %>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label :fecha %>
+                <%= f.text_field :date, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label "Fecha de entrega" %>
+                <%= f.text_field :delivered_date, class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label "Fecha de pago" %>
+                <%= f.text_field :pay_date, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label :valor %>
+                <%= f.number_field :amount, class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label :deuda %>
+                <%= f.number_field :debt, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label :referencia %>
+                <%= f.text_field :reference, class: "form-control" %>
+              </div>
+            </div>
+            <!-- <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label :foto %>
+                <%= f.file_field :photo %>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Campo oculto: :parametro, valor -->
+        <%= hidden_field_tag :client_id, params[:client_id]  %>
+
+        <div class="modal-footer">
+          <%= link_to "Cancel", "#", class:"btn btn-default", 'data-dismiss': "modal" %>
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+</div>

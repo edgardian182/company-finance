@@ -1,12 +1,28 @@
 class OrdersController < ApplicationController
+  before_action :set_order, only: [:show,:edit,:update,:destroy]
+
   def index
-    @tab = :clients
+    @tab = :orders
+    @orders = Order.all
   end
 
   def new
+    @order = Order.new
   end
 
   def create
+    @order = Order.new(order_params)
+    @order.user = current_user
+    @order.client_id = params[:client_id]
+
+    respond_to do |format|
+      if @order.save
+        format.html {redirect_to orders_path, notice: 'La orden se ha creado con éxito.'}
+        format.js {}
+      else
+        format.html {render :new}
+      end
+    end
   end
 
   def show
@@ -19,5 +35,14 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+  end
+
+  private 
+  def order_params
+    params.require(:order).permit(:state,:date,:amount,:reference,:client_id,:paid,:debt,:delivered_date,:pay_date,:user_id)
+  end
+
+  def set_order
+    @order = Order.find(params[:id])
   end
 end

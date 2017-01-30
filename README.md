@@ -24,7 +24,12 @@ TRICKS:
 - En un filtro se deben recibir las variables que filtran en un FORM
   * Por TYPE, CATEGORY, DATE
 
-- 
+4. ENUM
+- Se usa para dar varios posibles valores a un campo en el MODEL
+  enum state: {Nuevo:0, Pendiente:1, Entregado:2, Pagado:3}
+- En el form se debe pasar el String definido y no el Integer para guardarle
+  <%= f.select :state, Order.states.keys.to_a, {class: "form-control"}  %>
+    => Rails inteligentemente le asignará correctamente
 
 
 ## README

@@ -1,2 +1,52 @@
-<h1>Orders#index</h1>
-<p>Find me in app/views/orders/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    
+    <%= form_tag orders_path, remote:true, method: :get, id:"order-lookup-form" do %>
+      <div class="form-group">
+        <div class="col-xs-6">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <%= button_tag(type: :submit, class:"btn btn-info") do %>
+                <span class="glyphicon glyphicon-search"></span>
+              <% end %>
+            </span>
+            <%= text_field_tag :name, params[:search], placeholder: "Buscar pedido", autofocus:true, class:"form-control" %> 
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+
+    <div class="col-xs-6 text-right">
+      <%= link_to "<span class='glyphicon glyphicon-plus'></span> Generar pedido".html_safe, new_order_path, class: "btn btn-success", remote: true %>
+    </div>
+    <br><br><br>
+
+    <table id="orders-table" class="table table-hover" style="margin-top: 20px;">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th class="">Cliente</th>
+          <th class="">Fecha de entrega</th>
+          <th class="">Fecha de pago</th>
+          <th class="">Valor</th>
+          <th class="">Deuda</th>
+          <th class="">Vendedor</th>
+          <th class="">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if !@orders.empty? %>
+          <% @orders.each do |order| %>
+            <%= render 'row', order: order %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <br><br>
+    <% if @orders.empty? %>
+      <h2 class="text-center">No se han generado pedidos</h2>
+    <% end %>
+  
+  </div>
+</div>

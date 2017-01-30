@@ -1,3 +1,27 @@
 // Place all the styles related to the orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.filter-header {
+  color: #808487;
+
+  span {
+    display: block;
+    color: #808487;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+}
+
+#orders-table {
+  .actions {
+    a {
+      visibility: hidden;
+      font-size: 13px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
+
+  tr:hover .actions a { visibility: visible; }
+}

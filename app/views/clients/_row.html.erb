@@ -29,5 +29,6 @@
       <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, client_path(client), method: :delete, data: {confirm: "Estas seguro que deseas eliminar este cliente?"}, remote: true %>
     </div>
   </td>
+  <td><%= link_to "<span class='glyphicon glyphicon-shopping-cart'></span>".html_safe, new_order_path(params: {client_id: client.id}), remote: true %></td>
 
 </tr>
