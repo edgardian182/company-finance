@@ -32,6 +32,14 @@ class OrdersController < ApplicationController
   end
 
   def update
+    respond_to do |format|
+      if @order.update(order_params)
+        format.html { redirect_to orders_path, notice: 'El pedido ha sido actualizado' }
+        format.js {}
+      else
+        format.html { render :new }
+      end
+    end
   end
 
   def destroy
