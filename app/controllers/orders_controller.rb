@@ -34,12 +34,32 @@ class OrdersController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to orders_path, notice: 'El pedido ha sido actualizado' }
-        format.js {}
-      else
-        format.html { render :new }
+    if params[:pago] == "ready"
+      respond_to do |format|
+        if @order.update(debt: 0, paid: true, state:3)
+          format.html { redirect_to orders_path, notice: 'El pedido ha sido actualizado' }
+          format.js {}
+        else
+          format.html { render :new }
+        end
+      end
+    elsif params[:pago] == "notready"
+      respond_to do |format|
+        if @order.update(debt: @order.amount, paid: false, state:2)
+          format.html { redirect_to orders_path, notice: 'El pedido ha sido actualizado' }
+          format.js {}
+        else
+          format.html { render :new }
+        end
+      end
+    else
+      respond_to do |format|
+        if @order.update(order_params)
+          format.html { redirect_to orders_path, notice: 'El pedido ha sido actualizado' }
+          format.js {}
+        else
+          format.html { render :new }
+        end
       end
     end
   end

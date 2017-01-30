@@ -15,5 +15,8 @@
       <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, order_path(order), method: :delete, data: {confirm: "Estas seguro que deseas eliminar esta orden?"}, remote: true %>
     </div>
   </td>
+  <td>
+    <%= link_to "<span class='glyphicon glyphicon-ok-circle'></span>".html_safe, order_path(order, params: {pago: "ready"}), method: :patch, data: {confirm: "Confirma que el cliente ha pagado este pedido?"} %>
+    <%= link_to "<span class='glyphicon glyphicon-remove-circle'></span>".html_safe, order_path(order, params: {pago: "notready"}), method: :patch, data: {confirm: "Confirma que el cliente NO ha pagado este pedido?"} %></td>
 
 </tr>
