@@ -16,7 +16,7 @@
     </div>
   </td>
   <td>
-    <%= link_to "<span class='glyphicon glyphicon-ok-circle'></span>".html_safe, order_path(order, params: {pago: "ready"}), method: :patch, data: {confirm: "Confirma que el cliente ha pagado este pedido?"} %>
-    <%= link_to "<span class='glyphicon glyphicon-remove-circle'></span>".html_safe, order_path(order, params: {pago: "notready"}), method: :patch, data: {confirm: "Confirma que el cliente NO ha pagado este pedido?"} %></td>
+    <%= link_to "<span class='glyphicon glyphicon-ok-circle'></span>".html_safe, order_path(order, params: {pago: "ready"}), method: :patch, data: {confirm: "Confirma que el cliente ha pagado este pedido?"}, remote: true %>
+    <%= link_to "<span class='glyphicon glyphicon-remove-circle'></span>".html_safe, order_path(order, params: {pago: "notready"}), method: :patch, data: {confirm: "Confirma que el cliente NO ha pagado este pedido?"}, remote: true %></td>
 
 </tr>

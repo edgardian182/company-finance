@@ -8,24 +8,32 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Deligurt</a>
+      <a class="navbar-brand" href="/">YUZY</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="<%= 'active' if @tab == :dashboard %>"><%= link_to "Dashboard", root_path %></li>
-        <li class="<%= 'active' if @tab == :expenses %>"><%= link_to "Gastos", expenses_path %></li>
-        <li class="<%= 'active' if @tab == :incomes %>"><%= link_to "Ingresos", "#" %></li>
+        <% if current_user.superadmin_role? || current_user.supervisor_role? %>
+          <li class="<%= 'active' if @tab == :dashboard %>"><%= link_to "Dashboard", root_path %></li> 
+          <li class="<%= 'active' if @tab == :expenses %>"><%= link_to "Gastos", expenses_path %></li>
+          <li class="<%= 'active' if @tab == :incomes %>"><%= link_to "Ingresos", "#" %></li>
+        <% end %>
         <li class="<%= 'active' if @tab == :orders %>"><%= link_to "Pedidos", orders_path %></li>
         <li class="<%= 'active' if @tab == :clients %>"><%= link_to "Clientes", clients_path %></li>
-        <li class="<%= 'active' if @tab == :sellers %>"><%= link_to "Vendedores", "#" %></li>
-        <li class="<%= 'active' if @tab == :suppliers %>"><%= link_to "Proveedores", "#" %></li>
+        <% if current_user.superadmin_role? || current_user.supervisor_role? %>
+          <li class="<%= 'active' if @tab == :sellers %>"><%= link_to "Vendedores", "#" %></li>
+          <li class="<%= 'active' if @tab == :suppliers %>"><%= link_to "Proveedores", "#" %></li>
+          <li class="<%= 'active' if @tab == :inventory %>"><%= link_to "Inventario", "#" %></li>
+        <% end %>
       </ul>
 
       <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <%= link_to "Salir", destroy_user_session_path, method: :delete %>
+            <div class="btn"  style="margin-top: 5px">
+              <%= current_user.name %> <%= current_user.lastname %> 
+              <%= link_to "Salir", destroy_user_session_path, method: :delete %>
+            </div>
           </li>
         </ul>
       <% end %>

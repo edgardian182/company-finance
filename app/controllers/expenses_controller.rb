@@ -2,6 +2,7 @@ class ExpensesController < ApplicationController
   before_action :get_expense, only: [:edit,:show,:update,:destroy]
   before_action :set_expenses, only: [:index, :create, :update, :destroy]
   before_action :send_parameters, only: [:edit, :new, :update]
+  before_action :require_admin
 
   def index
     @tab = :expenses

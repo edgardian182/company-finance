@@ -3,7 +3,11 @@ class OrdersController < ApplicationController
 
   def index
     @tab = :orders
-    @orders = Order.all
+    if current_user.superadmin_role? || current_user.supervisor_role?
+      @orders = Order.all
+    else
+      @orders = Order.all.where(user: current_user)
+    end
   end
 
   def new
@@ -14,7 +18,9 @@ class OrdersController < ApplicationController
     @client = Client.find(params[:client_id])
 
     @order = Order.new(order_params)
-    @order.user = current_user
+    # El vendedor de la orden será el current_user o el especificado por un superadmin
+    @order.user = current_user if !params[:order][:user_id]
+        
     @order.client_id = params[:client_id]
 
     respond_to do |format|
@@ -34,6 +40,8 @@ class OrdersController < ApplicationController
   end
 
   def update
+    @orders = Order.all
+
     if params[:pago] == "ready"
       respond_to do |format|
         if @order.update(debt: 0, paid: true, state:3)

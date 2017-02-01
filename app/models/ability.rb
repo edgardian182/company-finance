@@ -19,6 +19,7 @@ class Ability
         # can :create, Client
         # can :update, Client, :user => current_user
         can :crud, Client, :user_id => user.id
+        can :crud, Order, :user_id => user.id
         # can :crud, Order, :client_id => 
     end
 

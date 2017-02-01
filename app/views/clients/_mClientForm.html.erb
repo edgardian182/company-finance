@@ -58,6 +58,15 @@
                 <%= f.text_field :reference, class: "form-control" %>
               </div>
             </div>
+
+            <% if current_user.superadmin_role || current_user.supervisor_role %>
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <%= f.label :vendedor %>
+                  <%= f.collection_select :user_id, User.all, :id, :name, {selected: @client.user_id}, {class: "form-control"} %>
+                </div>
+              </div>
+            <% end %>
             <!-- <div class="col-xs-6">
               <div class="form-group">
                 <%= f.label :foto %>

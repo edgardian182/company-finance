@@ -1,5 +1,6 @@
 <% if @order.errors.empty? %>
   $('table tbody').find('#<%= @order.id %>').replaceWith("<%= j render 'row', order: @order %>");
+  $('#total').html("<%= number_to_currency(@orders.where(state:3).sum(:amount)) %>")
   $('#newOrder').modal('hide');
 
 <% else %>

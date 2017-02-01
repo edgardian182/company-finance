@@ -16,7 +16,8 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(client_params)
-    @client.user = current_user
+    # Siempre lo esta guardando con el current_user --> ARREGLAR
+    @client.user = current_user if !params[:client][:user_id]
 
     respond_to do |format|
       if @client.save
@@ -51,7 +52,7 @@ class ClientsController < ApplicationController
 
   private 
   def client_params
-    params.require(:client).permit(:name,:lastname,:address,:phone,:email,:city,:reference,:photo)
+    params.require(:client).permit(:name,:lastname,:address,:phone,:email,:city,:reference,:photo,:user_id)
   end
 
   def set_client
