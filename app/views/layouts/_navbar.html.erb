@@ -13,14 +13,14 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <% if current_user.superadmin_role? || current_user.supervisor_role? %>
+        <% if user_signed_in? && (current_user.superadmin_role? || current_user.supervisor_role?) %>
           <li class="<%= 'active' if @tab == :dashboard %>"><%= link_to "Dashboard", root_path %></li> 
           <li class="<%= 'active' if @tab == :expenses %>"><%= link_to "Gastos", expenses_path %></li>
           <li class="<%= 'active' if @tab == :incomes %>"><%= link_to "Ingresos", "#" %></li>
         <% end %>
         <li class="<%= 'active' if @tab == :orders %>"><%= link_to "Pedidos", orders_path %></li>
         <li class="<%= 'active' if @tab == :clients %>"><%= link_to "Clientes", clients_path %></li>
-        <% if current_user.superadmin_role? || current_user.supervisor_role? %>
+         <% if user_signed_in? && (current_user.superadmin_role? || current_user.supervisor_role?) %>
           <li class="<%= 'active' if @tab == :sellers %>"><%= link_to "Vendedores", "#" %></li>
           <li class="<%= 'active' if @tab == :suppliers %>"><%= link_to "Proveedores", "#" %></li>
           <li class="<%= 'active' if @tab == :inventory %>"><%= link_to "Inventario", "#" %></li>
