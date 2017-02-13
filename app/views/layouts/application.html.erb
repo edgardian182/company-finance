@@ -12,7 +12,15 @@
   <body>
     
     <%= render 'layouts/navbar' %>
-
+    
+    <div class="container">
+      <% flash.each do |key,message| %>
+        <div class='alert alert-<%= "#{key}" %>' >
+          <a href="#" class="close" data-dismiss="alert">&#215;</a>
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
     <%= yield %>
 
   </body>

@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   def require_admin
-    if !current_user.superadmin_role? || !current_user.supervisor_role?
-      flash[:notice] = "Solo puedes ingresar si eres administrador"
+    unless current_user.superadmin_role? || current_user.supervisor_role?
+      flash[:warning] = "Solo puedes ingresar si eres administrador"
       redirect_to clients_path
     end
   end
