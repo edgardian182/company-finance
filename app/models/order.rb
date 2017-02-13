@@ -21,5 +21,14 @@ class Order < ApplicationRecord
   belongs_to :client
   belongs_to :user
 
+  after_save :debt_set
+
   enum state: {Nuevo:0, Pendiente:1, Entregado:2, Pagado:3}
+
+  def debt_set
+    if self.debt.class == NilClass
+      self.debt = 0
+      self.save
+    end 
+  end
 end
