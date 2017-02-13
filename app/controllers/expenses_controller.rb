@@ -46,19 +46,27 @@ class ExpensesController < ApplicationController
   def update
     # debugger
     # @expenses = Expense.all  # Se usa para actualizar el Average
-    respond_to do |format|
-      if @expense.update(expenses_params)
-        format.html { redirect_to expenses_path, notice: 'Expense was successfully updated.' }
-        format.js {}
-      else
-        format.html { render :new }
+    if current_user.superadmin_role? || (@expense.user == current_user)
+      respond_to do |format|
+        if @expense.update(expenses_params)
+          format.html { redirect_to expenses_path, notice: 'Expense was successfully updated.' }
+          format.js {}
+        else
+          format.html { render :new }
+        end
       end
+    else
+      flash[:warning] = "No creaste este gasto así que no le puedes editar"
     end
   end
 
   def destroy
     # @expenses = Expense.all  # Se usa para actualizar el Average
-    @expense.destroy
+    if current_user.superadmin_role? || (@expense.user == current_user)
+      @expense.destroy
+    else
+      flash[:warning] = "No creaste este gasto así que no le puedes eliminar"
+    end
   end
 
 
@@ -72,7 +80,13 @@ class ExpensesController < ApplicationController
   end
 
   def set_expenses
-    @expenses = Expense.all.order("date")
+    # @expenses = Expense.all.order("date DESC").where("cast(strftime('%m', date) as int) = ?", Time.now.month)
+    if params[:date].present? && params[:date] != ""
+      date = Date.parse(params[:date])
+      @expenses = Expense.all.order("date DESC").where("date BETWEEN ? AND ?", date.beginning_of_month, date.end_of_month)
+    else
+      @expenses = Expense.all.order("date DESC").where("date BETWEEN ? AND ?", Date.current.beginning_of_month, Date.current.end_of_month)
+    end
 
     if params[:type].present? && params[:type] != ""
       @expenses = @expenses.where("type_id = ?", params[:type]);

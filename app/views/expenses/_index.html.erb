@@ -18,6 +18,7 @@
           <% end %>
         </div>
       </div>
+
       <div class="col-md-9 col-xs-8 col-sm-9 index-data">
         <div class="row" style="margin-top: 10px;">
           <div class="summary-box col-md-4 text-center">
@@ -44,11 +45,22 @@
 
 
             <h4 class="dropdown pull-right">
-              <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">April 2016 <span class="caret"></span></button>
+              <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">
+                <% if params[:date] %>
+                  <% date = Date.parse(params[:date]) %>
+                  <%= Date::MONTHNAMES[date.month] %> <%= date.year %> <span class="caret"></span>
+                <% else %>
+                 <%= Date::MONTHNAMES[Date.current.month] %> <%= Date.current.year %> <span class="caret"></span>
+                <% end %>
+              </button>
+
               <ul class="dropdown-menu" role="menu">
-                <li role="presentation"><a href="#">April 2016</a></li>
-                <li role="presentation"><a href="#">March 2016</a></li>
-                <!-- more months -->
+                <% 13.times.map {|i| (Date.today - i.month).beginning_of_month }.each do |m| %>
+                  <!-- <li role="presentation"><a href="#"><%= Date::MONTHNAMES[m.month] %> <%= m.year %></a></li> -->
+                  <li role="presentation">
+                    <%= link_to m.strftime("%B %Y"), expenses_path(date: m), remote: true %>
+                  </li>
+                <% end %>
               </ul>
             </h4>
           </div>
