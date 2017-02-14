@@ -31,6 +31,25 @@ TRICKS:
   <%= f.select :state, Order.states.keys.to_a, {class: "form-control"}  %>
     => Rails inteligentemente le asignará correctamente
 
+5. COOKIES
+  Please note that if you specify a :domain when setting a cookie, you must also specify the domain when deleting the cookie:
+
+   cookies[:key] = {
+     :value => 'a yummy cookie',
+     :expires => 1.year.from_now,
+     :domain => 'domain.com'
+   }
+
+   cookies.delete(:key, :domain => 'domain.com')
+  The option symbols for setting cookies are:
+
+  * :value - The cookie’s value or list of values (as an array).
+  * :path - The path for which this cookie applies. Defaults to the root of the application.
+  * :domain - The domain for which this cookie applies.
+  * :expires - The time at which this cookie expires, as a Time object.
+  * :secure - Whether this cookie is a only transmitted to HTTPS servers. Default is false.
+  * :httponly - Whether this cookie is accessible via scripting or only HTTP. Defaults to fals
+
 
 ## README
 

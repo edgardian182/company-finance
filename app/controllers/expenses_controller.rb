@@ -65,7 +65,8 @@ class ExpensesController < ApplicationController
     if current_user.superadmin_role? || (@expense.user == current_user)
       @expense.destroy
     else
-      flash[:warning] = "No creaste este gasto así que no le puedes eliminar"
+      flash.now[:warning] = "No creaste este gasto así que no le puedes eliminar"
+      render 'index'
     end
   end
 
@@ -81,20 +82,49 @@ class ExpensesController < ApplicationController
 
   def set_expenses
     # @expenses = Expense.all.order("date DESC").where("cast(strftime('%m', date) as int) = ?", Time.now.month)
-    if params[:date].present? && params[:date] != ""
-      date = Date.parse(params[:date])
-      @expenses = Expense.all.order("date DESC").where("date BETWEEN ? AND ?", date.beginning_of_month, date.end_of_month)
+    if params[:date].present?
+      cookies[:date] = {value: params[:date], expires: 1.hour.from_now}
+      date_filter
+    elsif cookies[:date]
+      params[:date] = cookies[:date]
+      date_filter
     else
       @expenses = Expense.all.order("date DESC").where("date BETWEEN ? AND ?", Date.current.beginning_of_month, Date.current.end_of_month)
     end
 
-    if params[:type].present? && params[:type] != ""
+    if cookies[:type] && params[:type] 
+      cookies.delete(:type)
+    elsif params[:type].present? && params[:type] != ""
+      cookies[:type] = {value: params[:type], expires: 1.hour.from_now}
       @expenses = @expenses.where("type_id = ?", params[:type]);
+      @cookie_type = params[:type]
+    elsif cookies[:type]
+      params[:type] = cookies[:type] 
+      @expenses = @expenses.where("type_id = ?", params[:type]);
+      @cookie_type = cookies[:type]
+    end
+
+    if cookies[:category] && params[:category] 
+      cookies.delete(:category)
+    elsif params[:category].present? && params[:category] != ""
+      cookies[:category] = {value: params[:category], expires: 1.hour.from_now}
+      @expenses = @expenses.where("category_id = ?", params[:category]);
+      @cookie_category = params[:category]
+    elsif cookies[:category]
+      params[:category] = cookies[:category] 
+      @expenses = @expenses.where("type_id = ?", params[:category]);
+      @cookie_category = cookies[:category]
     end
   end
 
   def send_parameters
     @parameters = params
   end
+
+  def date_filter
+    date = Date.parse(params[:date])
+    @expenses = Expense.all.order("date DESC").where("date BETWEEN ? AND ?", date.beginning_of_month, date.end_of_month)
+  end
+
 
 end
