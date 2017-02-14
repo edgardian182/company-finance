@@ -47,7 +47,11 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    @client.destroy
+    if current_user.superadmin_role?
+      @client.destroy
+    else
+      flash[:warning] = "No tienes permiso para eliminar clientes"
+    end
   end
 
   private 

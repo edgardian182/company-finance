@@ -73,7 +73,11 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    @order.destroy
+    if current_user.superadmin_role? || current_user.supervisor_role?
+      @order.destroy
+    else
+      flash[:warning] = "No tienes permiso para eliminar pedidos"
+    end
   end
 
   private 

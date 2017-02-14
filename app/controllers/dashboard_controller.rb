@@ -3,4 +3,8 @@ class DashboardController < ApplicationController
   def index
     @tab = :dashboard
   end
+
+  def welcome
+    
+  end
 end
