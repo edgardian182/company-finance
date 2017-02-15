@@ -1,0 +1,133 @@
+<div class="index">
+
+
+  <div class="container">
+    <div class="row">
+
+      <div class="row" style="margin-top: 10px;">
+        <div class="summary-box col-xs-4 text-center">
+          <div class="summary-value" id="total">
+            <span style="color: #47FB5C"><%= number_to_currency(@orders.where(state: [2,3]).sum(:amount) - @orders.sum(:debt)) %></span>
+          </div>
+          <div class="summary-label" style="color: white">Ingresos</div>
+        </div>
+        <div class="summary-box col-xs-4 text-center">
+          <div class="summary-value" id="deuda">
+            <span style="color: #FB4747"><%= number_to_currency(@orders.sum(:debt)) %></span>
+          </div>
+          <div class="summary-label" style="color: white">Deuda Acumulada</div>
+        </div>
+        <div class="summary-box col-xs-4 text-center">
+          <div class="summary-value" id="transactions"><span style="color: #47E6FB"><%= @orders.count %></span></div>
+          <div class="summary-label" style="color: white">Nº de Pedidos</div>
+        </div>
+      </div>
+
+      <br><br>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <%= form_tag orders_path, remote:true, method: :get, id:"order-lookup-form" do %>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <%= button_tag(type: :submit, class:"btn btn-info") do %>
+                    <span class="glyphicon glyphicon-search"></span>
+                  <% end %>
+                </span>
+                <%= text_field_tag :name, params[:search], placeholder: "Buscar pedido", autofocus:true, class:"form-control" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="col-xs-2">
+          <%= link_to "MOROSOS", orders_path(mora: true), class: "btn btn-danger" %>
+          <%= link_to "All", orders_path(all: true), class: "btn btn-info" %>
+        </div>
+
+        <div class="col-xs-2">
+          <% if current_user.superadmin_role? || current_user.supervisor_role? %>
+            <h4 class="dropdown pull-right">
+              <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">
+                <% if params[:vendedor] %>
+                  <%= User.find(params[:vendedor].to_i).name %> <span class="caret"></span>
+                <% elsif cookies[:vendedor] %>
+                  <%= User.find(cookies[:vendedor].to_i).name %> <span class="caret"></span>
+                <% else %>
+                 Vendedor <span class="caret"></span>
+                <% end %>
+              </button>
+
+              <ul class="dropdown-menu" role="menu">
+                <% User.all.each do |vendedor| %>
+                  <li role="presentation">
+                    <%= link_to vendedor.name, orders_path(vendedor: vendedor.id), remote: true %>
+                  </li>
+                <% end %>
+              </ul>
+            </h4>
+          <% end %>
+        </div>
+
+        <div class="col-xs-2">
+          <h4 class="dropdown pull-right">
+            <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">
+              <% if params[:date_order] %>
+                <% date = Date.parse(params[:date_order]) %>
+                <%= Date::MONTHNAMES[date.month] %> <%= date.year %> <span class="caret"></span>
+              <% else %>
+               <%= Date::MONTHNAMES[Date.current.month] %> <%= Date.current.year %> <span class="caret"></span>
+              <% end %>
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+              <% 13.times.map {|i| (Date.today - i.month).beginning_of_month }.each do |m| %>
+                <!-- <li role="presentation"><a href="#"><%= Date::MONTHNAMES[m.month] %> <%= m.year %></a></li> -->
+                <li role="presentation">
+                  <%= link_to m.strftime("%B %Y"), orders_path(date_order: m), remote: true %>
+                </li>
+              <% end %>
+            </ul>
+          </h4>
+        </div>
+
+      </div>
+
+     <!--  <div class="col-xs-6 text-right">
+        <%= link_to "<span class='glyphicon glyphicon-plus'></span> Generar pedido".html_safe, new_order_path, class: "btn btn-success", remote: true %>
+      </div> -->
+      <br>
+
+      <table id="orders-table" class="table table-hover" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <th class="">Fecha</th>
+            <th class="">Cliente</th>
+            <th class="">Fecha de entrega</th>
+            <th class="">Fecha de pago</th>
+            <th class="">Valor</th>
+            <th class="">Deuda</th>
+            <th class="">Vendedor</th>
+            <th class="">Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if !@orders.empty? %>
+            <% @orders.each do |order| %>
+              <%= render 'row', order: order %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <br><br>
+      <% if @orders.empty? %>
+        <h2 class="text-center">No se han generado pedidos</h2>
+      <% end %>
+
+    </div>
+  </div>
+
+
+</div>

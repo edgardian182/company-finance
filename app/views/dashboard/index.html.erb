@@ -1,19 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="total-box col-md-3">
-      $200,000
+      <%= number_to_currency(Expense.all.where(date: Date.today).sum(:amount)) %>
       <span>HOY</span>
     </div>
     <div class="total-box col-md-3">
-      $140,000
+      <%= number_to_currency(Expense.all.where(date: Date.yesterday).sum(:amount)) %>
       <span>AYER</span>
     </div>
     <div class="total-box col-md-3">
-      $7,500,000
+      <%= number_to_currency(Expense.all.where("date BETWEEN ? AND ?", Date.current.beginning_of_month, Date.current.end_of_month).sum(:amount)) %>
       <span>ESTE MES</span>
     </div>
     <div class="total-box col-md-3">
-      $6,200,000
+      <%= number_to_currency(Expense.all.where("date BETWEEN ? AND ?", (Date.current - 1.month).beginning_of_month, (Date.current - 1.month).end_of_month).sum(:amount)) %>
       <span>MES PASADO</span>
     </div>
   </div>

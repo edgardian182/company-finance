@@ -1,1 +1,5 @@
 $('table tbody').find("#<%= @order.id %>").remove();
+
+$('#total').html("<span style='color: #47FB5C'><%= number_to_currency(@orders.where(state: [2,3]).sum(:amount) - @orders.sum(:debt)) %></span>")
+$('#deuda').html("<span style='color: #FB4747'><%= number_to_currency(@orders.sum(:debt)) %></span>")
+$('#transactions').html("<span style='color: #47E6FB'><%= @orders.count %></span>")

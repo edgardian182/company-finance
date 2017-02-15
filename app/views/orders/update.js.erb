@@ -1,6 +1,7 @@
 <% if @order.errors.empty? %>
   $('table tbody').find('#<%= @order.id %>').replaceWith("<%= j render 'row', order: @order %>");
-  $('#total').html("<%= number_to_currency(@orders.where(state:3).sum(:amount)) %>")
+  $('#total').html("<span style='color: #47FB5C'><%= number_to_currency(@orders.where(state: [2,3]).sum(:amount) - @orders.sum(:debt)) %></span>")
+  $('#deuda').html("<span style='color: #FB4747'><%= number_to_currency(@orders.sum(:debt)) %></span>")
   $('#newOrder').modal('hide');
 
 <% else %>

@@ -40,7 +40,7 @@ class ExpensesController < ApplicationController
   end
 
   def show
-    
+
   end
 
   def update
@@ -92,29 +92,29 @@ class ExpensesController < ApplicationController
       @expenses = Expense.all.order("date DESC").where("date BETWEEN ? AND ?", Date.current.beginning_of_month, Date.current.end_of_month)
     end
 
-    if cookies[:type] && params[:type] 
+    if params[:all]
       cookies.delete(:type)
-    elsif params[:type].present? && params[:type] != ""
+      cookies.delete(:category)
+    end
+
+    if params[:type].present? && params[:type] != ""
       cookies[:type] = {value: params[:type], expires: 1.hour.from_now}
       @expenses = @expenses.where("type_id = ?", params[:type]);
       @cookie_type = params[:type]
     elsif cookies[:type]
-      params[:type] = cookies[:type] 
-      @expenses = @expenses.where("type_id = ?", params[:type]);
+      @expenses = @expenses.where("type_id = ?", cookies[:type]);
       @cookie_type = cookies[:type]
     end
 
-    if cookies[:category] && params[:category] 
-      cookies.delete(:category)
-    elsif params[:category].present? && params[:category] != ""
+    if params[:category].present? && params[:category] != ""
       cookies[:category] = {value: params[:category], expires: 1.hour.from_now}
       @expenses = @expenses.where("category_id = ?", params[:category]);
       @cookie_category = params[:category]
     elsif cookies[:category]
-      params[:category] = cookies[:category] 
-      @expenses = @expenses.where("type_id = ?", params[:category]);
+      @expenses = @expenses.where("category_id = ?", cookies[:category]);
       @cookie_category = cookies[:category]
     end
+
   end
 
   def send_parameters

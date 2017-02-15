@@ -1,5 +1,5 @@
-<tr id="<%= order.id %>">
-  
+<tr id="<%= order.id %>" style="<%= 'background-color: #FB4747; color: white' if order.debt > 0 %>">
+
   <td><%= order.date %></td>
   <td><%= order.client.name %> <%= order.client.lastname %></td>
   <td><%= order.delivered_date %></td>
