@@ -1,18 +1,18 @@
 <tr id="<%= client.id %>">
-  
+
   <td>
     <div>
       <span class="type"> <%= client.name %> <%= client.lastname %></span>
     </div>
     <div>
       <span class="concept">
-        <span style="color: #90C9CE"><%= client.reference %></span> 
+        <span style="color: #90C9CE"><%= client.reference %></span>
       </span>
     </div>
   </td>
   <td><%= client.phone %></td>
   <td><%= client.city %></td>
-  <td><%= client.orders.count %></td>
+  <td class="text-center"><%= client.orders.count %></td>
   <td>
     <% if client.orders.count > 0 %>
     <%= client.orders.last.date  %>

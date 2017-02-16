@@ -1,13 +1,10 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:edit,:show,:update,:destroy]
+  before_action :set_clients, only: [:index, :create, :update, :destroy]
 
   def index
     @tab = :clients
-    if current_user.superadmin_role? || current_user.supervisor_role?
-      @clients = Client.all
-    else
-      @clients = Client.all.where(user: current_user)
-    end
+
   end
 
   def new
@@ -54,12 +51,53 @@ class ClientsController < ApplicationController
     end
   end
 
-  private 
+  private
   def client_params
     params.require(:client).permit(:name,:lastname,:address,:phone,:email,:city,:reference,:photo,:user_id)
   end
 
   def set_client
-    @client = Client.find(params[:id])    
+    @client = Client.find(params[:id])
+  end
+
+  def set_clients
+    if current_user.superadmin_role? || current_user.supervisor_role?
+      @clients = Client.all
+    else
+      @clients = Client.all.where(user: current_user)
+    end
+
+    if params[:all]
+      if current_user.superadmin_role? || current_user.supervisor_role?
+        cookies.delete(:vendedor)
+      else
+        @clients
+      end
+    end
+
+    if cookies[:pedidos] && params[:pedidos]
+      cookies.delete(:pedidos)
+      @clients = @clients.joins(:orders).group("orders.client_id").order("count(orders.client_id) ASC")
+    elsif params[:pedidos]
+      cookies[:pedidos] = params[:pedidos]
+      @clients = @clients.joins(:orders).group("orders.client_id").order("count(orders.client_id) DESC")
+    end
+
+    if cookies[:ultimo] && params[:ultimo]
+      cookies.delete(:ultimo)
+      @clients = @clients.joins(:orders).group("orders.client_id").order("MAX(orders.date) ASC")
+    elsif params[:ultimo]
+      cookies[:ultimo] = params[:ultimo]
+      @clients = @clients.joins(:orders).group("orders.client_id").order("MAX(orders.date) DESC")
+    end
+
+    if params[:vendedor].present?
+      cookies[:vendedor] = {value: params[:vendedor], expires: 1.hour.from_now}
+      @clients = @clients.where(user_id: params[:vendedor].to_i);
+      # @cookie_type = params[:type]
+    elsif cookies[:vendedor]
+      @clients = @clients.where(user_id: cookies[:vendedor].to_i);
+      # @cookie_type = cookies[:type]
+    end
   end
 end

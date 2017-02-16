@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        Cliente <%= client.id %>
+        Cliente <% client.id %>
       </div>
       <div class="modal-body text-center">
 
@@ -21,14 +21,14 @@
         <br><br>
         <h3>Datos de Venta</h3>
         <p><span style="font-weight:bold">Nº de Pedidos:</span> <%= client.orders.count %></p>
-        <p><span style="font-weight:bold">Último Pedido:</span> 
+        <p><span style="font-weight:bold">Último Pedido:</span>
           <% if client.orders.count > 0 %>
           <%= client.orders.last.date  %>
           <% else %>
           <%= "NN" %>
           <% end %>
         </p>
-        <p><span style="font-weight:bold">Debe:</span> 
+        <p><span style="font-weight:bold">Debe:</span>
           <% if client.orders.count > 0 %>
           <% deuda = 0 %>
           <% client.orders.each{|o| deuda += o.debt }  %>

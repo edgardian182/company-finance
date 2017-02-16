@@ -1,7 +1,10 @@
 <tr id="<%= order.id %>" style="<%= 'background-color: #FB4747; color: white' if order.debt > 0 %>">
 
   <td><%= order.date %></td>
-  <td><%= order.client.name %> <%= order.client.lastname %></td>
+  <td>
+    <% nombre = "#{order.client.name} #{order.client.lastname}" %>
+    <%= link_to nombre, client_path(order.client), style: "color: #99AAAA",remote: true %>
+  </td>
   <td><%= order.delivered_date %></td>
   <td><%= order.pay_date %></td>
   <td><%= order.amount %></td>

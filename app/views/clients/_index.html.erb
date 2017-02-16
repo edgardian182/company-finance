@@ -1,0 +1,80 @@
+<div class="index">
+
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-xs-6">
+        <%= form_tag clients_path, remote:true, method: :get, id:"client-lookup-form" do %>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <%= button_tag(type: :submit, class:"btn btn-info") do %>
+                  <span class="glyphicon glyphicon-search"></span>
+                <% end %>
+              </span>
+              <%= text_field_tag :name, params[:search], placeholder: "Buscar cliente", autofocus:true, class:"form-control" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-xs-2">
+        <%= link_to "All", clients_path(all: true), class: "btn btn-info" %>
+      </div>
+
+      <div class="col-xs-2">
+        <% if current_user.superadmin_role? || current_user.supervisor_role? %>
+          <h4 class="dropdown pull-right">
+            <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">
+              <% if params[:vendedor] %>
+                <%= User.find(params[:vendedor].to_i).name %> <span class="caret"></span>
+              <% elsif cookies[:vendedor] %>
+                <%= User.find(cookies[:vendedor].to_i).name %> <span class="caret"></span>
+              <% else %>
+               Vendedor <span class="caret"></span>
+              <% end %>
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+              <% User.all.each do |vendedor| %>
+                <li role="presentation">
+                  <%= link_to vendedor.name, clients_path(vendedor: vendedor.id), remote: true %>
+                </li>
+              <% end %>
+            </ul>
+          </h4>
+        <% end %>
+      </div>
+
+
+      <div class="col-xs-2 text-right">
+        <%= link_to "<span class='glyphicon glyphicon-plus'></span> Agregar cliente".html_safe, new_client_path(params: params), class: "btn btn-success", remote: true %>
+      </div>
+      <br><br><br>
+
+      <table id="clients-table" class="table table-hover" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <th class="">Nombre</th>
+            <th class="">Teléfono</th>
+            <th class="">Ciudad</th>
+            <th class=""><%= link_to "Nº Pedidos", clients_path(pedidos: true) %></th>
+            <th class=""><%= link_to "Ultimo Pedido", clients_path(ultimo: true) %></th>
+            <th class="">Vendedor</th>
+            <th class="">Estado</th>
+            <th class=""></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @clients.each do |client| %>
+            <%= render 'row', client: client %>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+
+</div>
