@@ -1,13 +1,19 @@
 Rails.application.routes.draw do
-  
+
   root "dashboard#index"
+
+  get "/users", to: "dashboard#index_user"
+  get "/newuser", to: "dashboard#new_user"
+  # post ""
+  get "/edituser", to: "dashboard#edit_user"
+
 
   devise_for :users
   as :user do
     get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
     put 'users' => 'devise/registrations#update', :as => 'user_registration'
   end
-  
+
   resources :expenses
   resources :clients
   resources :orders

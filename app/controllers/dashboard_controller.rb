@@ -5,6 +5,14 @@ class DashboardController < ApplicationController
   end
 
   def welcome
-    
+
+  end
+
+  def index_user
+    @users = User.all
+  end
+
+  def new_user
+    @user = User.new
   end
 end
