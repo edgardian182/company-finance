@@ -27,7 +27,7 @@
 
       <div class="row">
         <div class="col-xs-6">
-          <%= form_tag orders_path, remote:true, method: :get, id:"order-lookup-form" do %>
+          <%= form_tag orders_path, remote:true, method: :get, id:"order-lookup-form", autocomplete: :off do %>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
@@ -35,7 +35,7 @@
                     <span class="glyphicon glyphicon-search"></span>
                   <% end %>
                 </span>
-                <%= text_field_tag :name, params[:search], placeholder: "Buscar pedido", autofocus:true, class:"form-control" %>
+                <%= text_field_tag :search_order, params[:search_order], placeholder: "Buscar pedido", autofocus:true, class:"form-control" %>
               </div>
             </div>
           <% end %>

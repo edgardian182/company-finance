@@ -99,5 +99,9 @@ class ClientsController < ApplicationController
       @clients = @clients.where(user_id: cookies[:vendedor].to_i);
       # @cookie_type = cookies[:type]
     end
+
+    if params[:search_client]
+      @clients = @clients.where("name LIKE ? OR lastname LIKE ?", "%#{params[:search_client]}%", "%#{params[:search_client]}%")
+    end
   end
 end

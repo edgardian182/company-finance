@@ -5,7 +5,7 @@
     <div class="row">
 
       <div class="col-xs-6">
-        <%= form_tag clients_path, remote:true, method: :get, id:"client-lookup-form" do %>
+        <%= form_tag clients_path, remote:true, method: :get, id:"client-lookup-form", autocomplete: :off do %>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
@@ -13,7 +13,7 @@
                   <span class="glyphicon glyphicon-search"></span>
                 <% end %>
               </span>
-              <%= text_field_tag :name, params[:search], placeholder: "Buscar cliente", autofocus:true, class:"form-control" %>
+              <%= text_field_tag :search_client, params[:search_client], placeholder: "Buscar cliente", autofocus:true, class:"form-control" %>
             </div>
           </div>
         <% end %>

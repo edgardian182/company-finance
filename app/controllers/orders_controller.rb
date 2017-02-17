@@ -122,6 +122,11 @@ class OrdersController < ApplicationController
       @orders = @orders.where(user_id: cookies[:vendedor].to_i);
       # @cookie_type = cookies[:type]
     end
+
+    if params[:search_order]
+      clientes = Client.where("name LIKE ? OR lastname LIKE ?", "%#{params[:search_order]}%", "%#{params[:search_order]}%")
+      @orders = @orders.where(client_id: clientes.ids)
+    end
   end
 
   def date_filter
