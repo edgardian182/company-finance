@@ -1,4 +1,8 @@
-<tr id="<%= order.id %>" style="<%= 'background-color: #FB4747; color: white' if order.debt > 0 %>">
+<tr id="<%= order.id %>" style="<% if order.debt > 0 %>
+  <%= 'background-color: #FB4747; color: white' %>
+  <% elsif order.paid %>
+  <%= 'background-color: ; color: green' %>
+  <% end %>">
 
   <td><%= order.date %></td>
   <td>
@@ -21,7 +25,14 @@
     </div>
   </td>
   <td>
-    <%= link_to "<span class='glyphicon glyphicon-ok-circle'></span>".html_safe, order_path(order, params: {pago: "ready"}), method: :patch, data: {confirm: "Confirma que el cliente ha pagado este pedido?"}, remote: true %>
-    <%= link_to "<span class='glyphicon glyphicon-remove-circle'></span>".html_safe, order_path(order, params: {pago: "notready"}), method: :patch, data: {confirm: "Confirma que el cliente NO ha pagado este pedido?"}, remote: true %></td>
+    <%= link_to "<span class='glyphicon glyphicon-ok-circle'></span>".html_safe, order_path(order, params: {pago: "cli_ready"}), method: :patch, data: {confirm: "Confirma que el cliente ha pagado este pedido?"}, remote: true %>
+    <%= link_to "<span class='glyphicon glyphicon-remove-circle'></span>".html_safe, order_path(order, params: {pago: "cli_notready"}), method: :patch, data: {confirm: "Confirma que el cliente NO ha pagado este pedido?"}, remote: true %>
+  </td>
+  <% if current_user.superadmin_role? || current_user.supervisor_role? %>
+    <td>
+      <%= link_to "<span class='glyphicon glyphicon-thumbs-up'></span>".html_safe, order_path(order, params: {pago: "ready"}), method: :patch, data: {confirm: "Confirma PAGO a la empresa del pedido?"}, remote: true %>
+      <%= link_to "<span class='glyphicon glyphicon-thumbs-down'></span>".html_safe, order_path(order, params: {pago: "notready"}), method: :patch, data: {confirm: "Confirma NO!! PAGO a la empresa del pedido?"}, remote: true %>
+    </td>
+  <% end %>
 
 </tr>
