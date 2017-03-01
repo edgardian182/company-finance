@@ -142,7 +142,7 @@ class OrdersController < ApplicationController
     end
 
     if params[:search_order]
-      clientes = Client.where("name LIKE ? OR lastname LIKE ?", "%#{params[:search_order]}%", "%#{params[:search_order]}%")
+      clientes = Client.where("LOWER(name) LIKE ? OR LOWER(lastname) LIKE ? OR LOWER(reference) LIKE ?", "%#{params[:search_order].downcase}%", "%#{params[:search_order].downcase}%", "%#{params[:search_order].downcase}%")
       @orders = @orders.where(client_id: clientes.ids)
     end
   end
