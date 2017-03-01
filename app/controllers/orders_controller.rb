@@ -49,6 +49,24 @@ class OrdersController < ApplicationController
       end
     elsif params[:pago] == "notready"
       respond_to do |format|
+        if @order.update(paid: false)
+          format.html { redirect_to orders_path, notice: 'El pedido ha sido actualizado' }
+          format.js {}
+        else
+          format.html { render :new }
+        end
+      end
+    elsif params[:pago] == "cli_ready"
+      respond_to do |format|
+        if @order.update(debt: 0, paid: false, state:3)
+          format.html { redirect_to orders_path, notice: 'El pedido ha sido actualizado' }
+          format.js {}
+        else
+          format.html { render :new }
+        end
+      end
+    elsif params[:pago] == "cli_notready"
+      respond_to do |format|
         if @order.update(debt: @order.amount, paid: false, state:2)
           format.html { redirect_to orders_path, notice: 'El pedido ha sido actualizado' }
           format.js {}
