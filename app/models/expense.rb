@@ -34,7 +34,9 @@ class Expense < ApplicationRecord
 
 
   validates_attachment_content_type :invoice, content_type: /\Aimage\/.*\Z/
-  
+
+  validates_presence_of :amount
+
   # Carga Expenses junto a Types y Categories asociados a ellos en una sola consulta
   Expense.includes(:type, :category)
 
