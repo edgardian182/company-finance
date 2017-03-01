@@ -1,0 +1,38 @@
+# == Schema Information
+#
+# Table name: productions
+#
+#  id            :integer          not null, primary key
+#  entry_date    :date
+#  due_date      :date
+#  reference     :string
+#  size          :integer
+#  out_date      :date
+#  description   :string
+#  quantity      :float
+#  quantity_left :float
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  entry_date: 2017-02-28
+  due_date: 2017-02-28
+  reference: MyString
+  size: 1
+  out_date: 2017-02-28
+  description: MyString
+  quantity: 1.5
+  quantity_left: 1.5
+
+two:
+  entry_date: 2017-02-28
+  due_date: 2017-02-28
+  reference: MyString
+  size: 1
+  out_date: 2017-02-28
+  description: MyString
+  quantity: 1.5
+  quantity_left: 1.5

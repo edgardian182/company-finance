@@ -1,0 +1,71 @@
+<div class="index">
+
+
+  <div class="container">
+    <div class="row">
+
+      <br><br>
+
+      <div class="row">
+
+        <div class="col-xs-2 text-right">
+          <%= link_to "<span class='glyphicon glyphicon-plus'></span> Agregar Producción".html_safe, new_production_path, class: "btn btn-success", remote: true %>
+        </div>
+
+        <div class="col-xs-2">
+          <h4 class="dropdown pull-right">
+            <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">
+              <% if params[:date_order] %>
+                <% date = Date.parse(params[:date_order]) %>
+                <%= Date::MONTHNAMES[date.month] %> <%= date.year %> <span class="caret"></span>
+              <% else %>
+               <%= Date::MONTHNAMES[Date.current.month] %> <%= Date.current.year %> <span class="caret"></span>
+              <% end %>
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+              <% 13.times.map {|i| (Date.today - i.month).beginning_of_month }.each do |m| %>
+                <!-- <li role="presentation"><a href="#"><%= Date::MONTHNAMES[m.month] %> <%= m.year %></a></li> -->
+                <li role="presentation">
+                  <%= link_to m.strftime("%B %Y"), productions_path(date_order: m), remote: true %>
+                </li>
+              <% end %>
+            </ul>
+          </h4>
+        </div>
+
+      </div>
+
+      <br>
+
+      <table id="productions-table" class="table table-hover" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <th class="">Fecha de Entrada</th>
+            <th class="">Referencia</th>
+            <th class="">Tamaño</th>
+            <th class="">Cantidad</th>
+            <th class="">Fecha de Vencimiento</th>
+            <th class="">Cantidad Restante</th>
+            <th class="">Fecha Agotado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if !@productions.empty? %>
+            <% @productions.each do |production| %>
+              <%= render 'row', production: production %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <br><br>
+      <% if @productions.empty? %>
+        <h2 class="text-center">No se ha producido nada</h2>
+      <% end %>
+
+    </div>
+  </div>
+
+
+</div>

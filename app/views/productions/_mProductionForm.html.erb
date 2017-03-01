@@ -1,0 +1,82 @@
+<div class="modal fade" id="newProduction" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        PRODUCCIÓN
+
+      </div>
+
+      <%= form_for @production, remote: true, authenticity_token: true do |f| %>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label "Fecha Producción" %>
+                <p><%= f.date_select :entry_date, {start_year: 2017}, {:class => "form-control", :style => "display: inline-block; width: auto"} %></p>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label "Fecha de Vencimiento" %>
+                <p><%= f.date_select :due_date, {start_year: 2017}, {:class => "form-control", :style => "display: inline-block; width: auto"} %></p>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label :referencia %>
+                <!-- En esta colección pasamos y mostramos el :name -->
+                <%= f.collection_select :reference, Product.all, :name, :name, {selected: @production.reference, include_blank: true}, {class: "form-control"} %>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label :tamaño %>
+                <%= f.select :size, Production.sizes.keys.to_a, {}, {class: "form-control"}  %>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label :cantidad %>
+                <%= f.number_field :quantity, class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label "Cantidad Restante" %>
+                <%= f.number_field :quantity_left, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-xs-12">
+              <div class="form-group">
+                <%= f.label :descripción %>
+                <%= f.text_field :description, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label "Fecha Agotado" %>
+                <p><%= f.date_select :out_date, {start_year: 2017}, {:class => "form-control", :style => "display: inline-block; width: auto"} %></p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <%= link_to "Cancel", "#", class:"btn btn-default", 'data-dismiss': "modal" %>
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+</div>

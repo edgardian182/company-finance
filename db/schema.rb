@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170129141554) do
+ActiveRecord::Schema.define(version: 20170301033808) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -30,9 +29,8 @@ ActiveRecord::Schema.define(version: 20170129141554) do
     t.string   "reference"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_clients_on_user_id"
   end
-
-  add_index "clients", ["user_id"], name: "index_clients_on_user_id"
 
   create_table "expenses", force: :cascade do |t|
     t.string   "concept"
@@ -52,13 +50,12 @@ ActiveRecord::Schema.define(version: 20170129141554) do
     t.integer  "invoice_file_size"
     t.datetime "invoice_updated_at"
     t.string   "material"
+    t.index ["category_id"], name: "index_expenses_on_category_id"
+    t.index ["fund_id"], name: "index_expenses_on_fund_id"
+    t.index ["product_id"], name: "index_expenses_on_product_id"
+    t.index ["type_id"], name: "index_expenses_on_type_id"
+    t.index ["user_id"], name: "index_expenses_on_user_id"
   end
-
-  add_index "expenses", ["category_id"], name: "index_expenses_on_category_id"
-  add_index "expenses", ["fund_id"], name: "index_expenses_on_fund_id"
-  add_index "expenses", ["product_id"], name: "index_expenses_on_product_id"
-  add_index "expenses", ["type_id"], name: "index_expenses_on_type_id"
-  add_index "expenses", ["user_id"], name: "index_expenses_on_user_id"
 
   create_table "funds", force: :cascade do |t|
     t.string   "name"
@@ -72,9 +69,8 @@ ActiveRecord::Schema.define(version: 20170129141554) do
     t.integer  "category_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_materials_on_category_id"
   end
-
-  add_index "materials", ["category_id"], name: "index_materials_on_category_id"
 
   create_table "orders", force: :cascade do |t|
     t.integer  "state"
@@ -89,10 +85,28 @@ ActiveRecord::Schema.define(version: 20170129141554) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
+    t.index ["client_id"], name: "index_orders_on_client_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  add_index "orders", ["client_id"], name: "index_orders_on_client_id"
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+  create_table "productions", force: :cascade do |t|
+    t.date     "entry_date"
+    t.date     "due_date"
+    t.string   "reference"
+    t.integer  "size"
+    t.date     "out_date"
+    t.string   "description"
+    t.float    "quantity"
+    t.float    "quantity_left"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "types", force: :cascade do |t|
     t.string   "name"
@@ -122,9 +136,8 @@ ActiveRecord::Schema.define(version: 20170129141554) do
     t.string   "phone"
     t.string   "city"
     t.integer  "type"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

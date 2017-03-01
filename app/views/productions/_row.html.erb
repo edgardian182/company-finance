@@ -1,0 +1,22 @@
+<tr id="<%= production.id %>">
+
+  <td><%= production.entry_date %></td>
+  <td><%= production.reference %></td>
+  <td><%= production.size %></td>
+  <td><%= production.quantity %></td>
+  <td><%= production.due_date %></td>
+  <td><%= production.quantity_left %></td>
+  <td>
+    <div>
+      <%= production.out_date %>
+    </div>
+    <div class="actions">
+      <%= link_to "<span class='glyphicon glyphicon-eye-open'></span>".html_safe,production_path(production), remote: true %>
+      <%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_production_path(production), remote: true %>
+      <% if current_user.superadmin_role? %>
+        <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, production_path(production), method: :delete, data: {confirm: "Estas seguro que deseas eliminar esta producción?"}, remote: true %>
+      <% end %>
+    </div>
+  </td>
+
+</tr>

@@ -1,0 +1,7 @@
+<% if @production.errors.empty? %>
+  $('table tbody').find('#<%= @production.id %>').replaceWith("<%= j render 'row', production: @production %>");
+  $('#newProduction').modal('hide');
+
+<% else %>
+  alert("<%= @client.errors.full_messages[0] %>");
+<% end %>

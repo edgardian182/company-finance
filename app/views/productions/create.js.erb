@@ -1,0 +1,6 @@
+<% if @production.errors.empty? %>
+  $('table tbody').append(' <%= j render "row", production: @production %>');
+  $('#newProduction').modal('hide');
+<% else %>
+  alert('<%= @production.errors.full_messages[0] %>');
+<% end %>
