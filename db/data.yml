@@ -1624,6 +1624,23 @@ orders:
     - 1
 
 ---
+products:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - Yogurt Fresa
+    - '2017-03-01 05:05:21.026535'
+    - '2017-03-01 05:05:21.026535'
+  - - 2
+    - Yogurt Melocotón
+    - '2017-03-01 05:05:30.830326'
+    - '2017-03-01 05:05:30.830326'
+
+---
 types:
   columns:
   - id
