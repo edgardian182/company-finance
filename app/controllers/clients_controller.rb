@@ -101,7 +101,7 @@ class ClientsController < ApplicationController
     end
 
     if params[:search_client]
-      @clients = @clients.where("name LIKE ? OR lastname LIKE ?", "%#{params[:search_client]}%", "%#{params[:search_client]}%")
+      @clients = @clients.where("name LIKE ? OR lastname LIKE ? OR reference LIKE ?", "%#{params[:search_client]}%", "%#{params[:search_client]}%", "%#{params[:search_client]}%")
     end
   end
 end

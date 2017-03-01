@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
       end
     elsif params[:pago] == "notready"
       respond_to do |format|
-        if @order.update(debt: @order.amount, paid: false, state:2)
+        if @order.update(paid: false)
           format.html { redirect_to orders_path, notice: 'El pedido ha sido actualizado' }
           format.js {}
         else
