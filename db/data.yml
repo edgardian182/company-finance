@@ -1690,6 +1690,7 @@ users:
   - phone
   - city
   - type
+  - identification_card
   records: 
   - - 1
     - edgarquintana984@hotmail.com
@@ -1709,6 +1710,7 @@ users:
     - true
     - Edgar
     - Quintana
+    - 
     - 
     - 
     - 
@@ -1735,9 +1737,10 @@ users:
     - 322-4276678
     - Barrancabermeja
     - 
+    - 
   - - 3
     - miguelangelrodriguez2307@gmail.com
-    - "$2a$11$ErDPpiG2c2c00fiyChXi.ezG.ed7Yc.ppagq5Cx.spZ.T3yTqn9Ea"
+    - "$2a$11$a15YnQajF7YaloD0vD3doeVUHDe3BTImE7GiE2VOJOG242V4CYyqi"
     - 
     - 
     - 
@@ -1747,7 +1750,7 @@ users:
     - 127.0.0.1
     - 127.0.0.1
     - '2017-01-30 12:14:34.457518'
-    - '2017-02-14 05:25:37.721496'
+    - '2017-03-02 00:52:26.371249'
     - false
     - true
     - true
@@ -1756,6 +1759,7 @@ users:
     - 
     - 317-7645596
     - Barrancabermeja
+    - 
     - 
   - - 4
     - u1@gmail.com
@@ -1779,6 +1783,7 @@ users:
     - 311-3333333
     - Barrancabermeja
     - 
+    - 
   - - 5
     - rosacevedo15@gmail.com
     - "$2a$11$Li8f30mWw375l.Zb.PLWgedjwvuMrkDyH08QbxT.lDjvA4pmy9NFm"
@@ -1801,3 +1806,27 @@ users:
     - 
     - Barrancabermeja
     - 
+    - 
+  - - 6
+    - aleman_1406@hotmail.com
+    - "$2a$11$IP9q0PygC8ZWIGIpbWzWouBMu7Lh4kxxHKQod/bgvA2tX.oKGY5Ce"
+    - 
+    - 
+    - 
+    - 1
+    - '2017-03-01 23:17:53.990449'
+    - '2017-03-01 23:17:53.990449'
+    - 127.0.0.1
+    - 127.0.0.1
+    - '2017-03-01 23:13:38.927754'
+    - '2017-03-01 23:18:40.118427'
+    - false
+    - false
+    - true
+    - Germán Andrés
+    - Duarte Carreño
+    - 
+    - 320-206-1436
+    - Barrancabermeja
+    - 
+    - 1.096.232.852

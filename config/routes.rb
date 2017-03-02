@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root "dashboard#index"
+  root "dashboard#welcome"
 
   get "/users", to: "dashboard#index_user"
   get "/newuser", to: "dashboard#new_user"

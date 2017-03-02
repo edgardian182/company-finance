@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :require_admin
+  before_action :require_admin, except: [:welcome]
   def index
     @tab = :dashboard
   end
