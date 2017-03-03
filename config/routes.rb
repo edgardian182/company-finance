@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root "dashboard#welcome"
 
+  get "/dashboard", to: "dashboard#index"
   get "/users", to: "dashboard#index_user"
   get "/newuser", to: "dashboard#new_user"
   # post ""

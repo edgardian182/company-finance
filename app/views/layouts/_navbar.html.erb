@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <% if user_signed_in? && (current_user.superadmin_role? || current_user.supervisor_role?) %>
-          <li class="<%= 'active' if @tab == :dashboard %>"><%= link_to "Dashboard", root_path %></li>
+          <li class="<%= 'active' if @tab == :dashboard %>"><%= link_to "Dashboard", dashboard_path %></li>
           <li class="<%= 'active' if @tab == :expenses %>"><%= link_to "Gastos", expenses_path %></li>
           <li class="<%= 'active' if @tab == :incomes %>"><%= link_to "Ingresos", "#" %></li>
         <% end %>

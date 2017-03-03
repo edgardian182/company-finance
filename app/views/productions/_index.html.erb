@@ -15,8 +15,8 @@
         <div class="col-xs-2">
           <h4 class="dropdown pull-right">
             <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">
-              <% if params[:date_order] %>
-                <% date = Date.parse(params[:date_order]) %>
+              <% if params[:date_production] %>
+                <% date = Date.parse(params[:date_production]) %>
                 <%= Date::MONTHNAMES[date.month] %> <%= date.year %> <span class="caret"></span>
               <% else %>
                <%= Date::MONTHNAMES[Date.current.month] %> <%= Date.current.year %> <span class="caret"></span>
@@ -27,7 +27,7 @@
               <% 13.times.map {|i| (Date.today - i.month).beginning_of_month }.each do |m| %>
                 <!-- <li role="presentation"><a href="#"><%= Date::MONTHNAMES[m.month] %> <%= m.year %></a></li> -->
                 <li role="presentation">
-                  <%= link_to m.strftime("%B %Y"), productions_path(date_order: m), remote: true %>
+                  <%= link_to m.strftime("%B %Y"), productions_path(date_production: m), remote: true %>
                 </li>
               <% end %>
             </ul>

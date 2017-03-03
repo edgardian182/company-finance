@@ -7,7 +7,7 @@
       <div class="row" style="margin-top: 10px;">
         <div class="summary-box col-xs-4 text-center">
           <div class="summary-value" id="total">
-            <span style="color: #47FB5C"><%= number_to_currency(@orders.where(state: [2,3]).sum(:amount) - @orders.sum(:debt)) %></span>
+            <span style="color: #47FB5C"><%= number_to_currency(@orders.where(state: [2,3]).sum(:amount) - @orders.where(state: 2).sum(:debt)) %></span>
           </div>
           <div class="summary-label" style="color: white">Ingresos</div>
         </div>
