@@ -1,0 +1,11 @@
+<div class="alert alert-danger">
+  <% if obj.errors.any? %>
+    <a href="#" class="close" data-dismiss="alert">&#215;</a>
+    <h4>Se presentaron los siguientes errores</h4>
+    <ul>
+      <% obj.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

@@ -2,5 +2,5 @@
   // $('table tbody').find('#<%= @client.id %>').replaceWith(' <%= j render "clients/row", client: @client %>');
   $('#newOrder').modal('hide');
 <% else %>
-  alert('<%= @order.errors.full_messages[0] %>');
+  $('#errors').html(' <%= j render "shared/errors", obj: @order %> ');
 <% end %>

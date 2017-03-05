@@ -21,6 +21,7 @@ class ProductionsController < ApplicationController
         format.js {}
       else
         format.html { render :new }
+        format.js {}
         # format.json { render json: @client.errors, status: :unprocessable_entity }
       end
     end

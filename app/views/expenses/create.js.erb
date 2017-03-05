@@ -15,5 +15,5 @@
   $('#newExpense').modal('hide');
 <% else %>
   // show first error
-  alert('<%= @expense.errors.full_messages[0] %>');
+  $('#errors').html(' <%= j render "shared/errors", obj: @expense %> ');
 <% end %>

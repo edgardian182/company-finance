@@ -3,5 +3,5 @@
   $('table tbody').append(' <%= j render "row", client: @client %>');
   $('#newClient').modal('hide');
 <% else %>
-  alert('<%= @client.errors.full_messages[0] %>');
+  $('#errors').html(' <%= j render "shared/errors", obj: @client %> ');
 <% end %>
