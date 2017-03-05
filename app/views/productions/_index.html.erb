@@ -38,29 +38,43 @@
 
       <br>
 
-      <table id="productions-table" class="table table-hover" style="margin-top: 20px;">
-        <thead>
-          <tr>
-            <th class="">Fecha de Entrada</th>
-            <th class="">Referencia</th>
-            <th class="">Tamaño</th>
-            <th class="">Cantidad</th>
-            <th class="">Fecha de Vencimiento</th>
-            <th class="">Cantidad Restante</th>
-            <th class="">Fecha Agotado</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if !@productions.empty? %>
-            <% @productions.each do |production| %>
-              <%= render 'row', production: production %>
-            <% end %>
+      <% if !@productions.empty? %>
+        <% hash = {} %>
+        <% @productions.each do |production| %>
+
+          <% if hash[production.entry_date.to_s].nil? %>
+            <% hash[production.entry_date.to_s] = [production] %>
+          <% else %>
+            <% hash[production.entry_date.to_s].push(production) %>
           <% end %>
-        </tbody>
-      </table>
-      <br><br>
-      <% if @productions.empty? %>
+
+        <% end %>
+        <% hash.each do |date2,production| %>
+          <% date = Date.parse(date2) %>
+
+          <!-- <h3><%= Date::MONTHNAMES[date.month] %> <%= date.day %> de <%= date.year %></h3> -->
+          <h3><%= date2 %></h3>
+          <table id="productions-table" class="table table-hover" style="margin-top: 20px;">
+            <thead>
+              <tr>
+                <!-- <th class="">Fecha de Entrada</th> -->
+                <th class="">Referencia</th>
+                <th class="">Tamaño</th>
+                <th class="">Cantidad</th>
+                <th class="">Fecha de Vencimiento</th>
+                <th class="">Cantidad Restante</th>
+                <th class="">Fecha Agotado</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% production.each do |n| %>
+                <%= render 'row', production: n %>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      <% else %>
         <h2 class="text-center">No se ha producido nada</h2>
       <% end %>
 
