@@ -1,6 +1,12 @@
 <% if @production.errors.empty? %>
-  $('table tbody').append(' <%= j render "row", production: @production %>');
+  $('#productions-table tbody').append(' <%= j render "row", production: @production %>');
   $('#newProduction').modal('hide');
+
+  <% Product.all.each do |p| %>
+    $('#<%= p.name.split(" ")[1] %>').find("#P200g").html("<%= @productions.where(size: 'P200g', reference: p.name).sum(:quantity_left) %>")
+    $('#<%= p.name.split(" ")[1] %>').find("#P1000g").html("<%= @productions.where(size: 'P1000g', reference: p.name).sum(:quantity_left) %>")
+    $('#<%= p.name.split(" ")[1] %>').find("#P2000g").html("<%= @productions.where(size: 'P2000g', reference: p.name).sum(:quantity_left) %>")
+  <% end %>
 <% else %>
   $('#errors').html(' <%= j render "shared/errors", obj: @production %> ');
 <% end %>

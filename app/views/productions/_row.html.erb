@@ -8,7 +8,11 @@
   <td><%= production.quantity_left %></td>
   <td>
     <div>
-      <%= production.out_date %>
+      <% if production.out_date %>
+        <%= production.out_date %>
+      <% else %>
+        Aún disponibles
+      <% end %>
     </div>
     <div class="actions">
       <%= link_to "<span class='glyphicon glyphicon-eye-open'></span>".html_safe,production_path(production), remote: true %>

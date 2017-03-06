@@ -34,6 +34,28 @@
           </h4>
         </div>
 
+        <div class="col-xs-8">
+          <table class="table table-hover">
+            <caption class="text-center"><h3>Inventario Actual</h3></caption>
+            <thead>
+              <th>Referencia</th>
+              <th>200g</th>
+              <th>1000g</th>
+              <th>2000g</th>
+            </thead>
+            <tbody>
+              <% Product.all.each do |p| %>
+                <tr id="<%= p.name.split(" ")[1] %>">
+                  <td><%= p.name %></td>
+                  <td id="P200g"><%= @productions.where(size: "P200g", reference: p.name).sum(:quantity_left) %></td>
+                  <td id="P1000g"><%= @productions.where(size: "P1000g", reference: p.name).sum(:quantity_left) %></td>
+                  <td id="P2000g"><%= @productions.where(size: "P2000g", reference: p.name).sum(:quantity_left) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
       </div>
 
       <br>

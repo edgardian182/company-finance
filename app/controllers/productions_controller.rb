@@ -1,7 +1,7 @@
 class ProductionsController < ApplicationController
   before_action :get_production, only: [:edit,:show,:update,:destroy]
   before_action :require_admin
-  before_action :set_productions, only: [:index]
+  before_action :set_productions, only: [:index, :create, :update, :destroy]
 
   def index
     @tab = :production
