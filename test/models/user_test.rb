@@ -24,6 +24,7 @@
 #  phone                  :string
 #  city                   :string
 #  type                   :integer
+#  identification_card    :string
 #
 
 require 'test_helper'

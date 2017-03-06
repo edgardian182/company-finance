@@ -4,6 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
+  before_action :set_locale
+
+  def set_locale
+    I18n.locale = :es
+    if params[:locale]
+      I18n.locale = params[:locale].to_sym
+    end
+  end
 
   def require_admin
     unless current_user.superadmin_role? || current_user.supervisor_role?

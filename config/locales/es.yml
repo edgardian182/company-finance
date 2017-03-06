@@ -1,0 +1,90 @@
+es:
+  activerecord:
+    models:
+      category:
+        one: "Categoría"
+        other: "Categorías"
+      client:
+        one: "Cliente"
+        other: "Clientes"
+      expense:
+        one: "Gasto"
+        other: "Gastos"
+      fund:
+        one: "Fondo"
+        other: "Fondos"
+      material:
+        one: "Material"
+        other: "Materiales"
+      order:
+        one: "Orden"
+        other: "Ordenes"
+      product:
+        one: "Producto"
+        other: "Productos"
+      type:
+        one: "Tipo"
+        other: "Tipos"
+      production:
+        one: "Producción"
+        other: "Producciones"
+      user:
+        one: "Usuario"
+        other: "Usuarios"
+    attributes:
+      category:
+        name       : "Nombre"
+      client:
+        name       : "Nombre"
+        lastname   : "Apellido"
+        address    : "Dirección"
+        phone      : "Teléfono"
+        email      : "Email"
+        city       : "Ciudad"
+        reference  : "Referencia"
+      expense:
+        concept              : "Concepto"
+        date                 : "Fecha"
+        amount               : "Valor"
+        quantity             : "Cantidad"
+        measure              : "Medida"
+        material             : "Material"
+      fund:
+        name       : "Nombre"
+        amount     : "Cantidad"
+      material:
+        name        : "Nombre"
+      order:
+        state          : "Estado"
+        date           : "Fecha"
+        amount         : "Cantidad"
+        reference      : "Referencia"
+        paid           : "Pago"
+        debt           : "Deuda"
+        delivered_date : "Fecha de Entrega"
+        pay_date       : "Fecha de Pago"
+      product:
+        name       : "Nombre"
+      type:
+        name       : "Nombre"
+      production:
+        entry_date    : "Fecha de Entrada"
+        due_date      : "Fecha de Vencimiento"
+        reference     : "Referencia"
+        size          : "Tamaño"
+        out_date      : "Fecha de Agotado"
+        description   : "Descripción"
+        quantity      : "Cantidad"
+        quantity_left : "Cantidad Restante"
+      user:
+        email                  : "Email"
+        name                   : "Nombre"
+        lastname               : "Apellido"
+        address                : "Dirección"
+        phone                  : "Teléfono"
+        city                   : "Ciudad"
+        type                   : "Tipo"
+        identification_card    : "Identificación"
+
+
+

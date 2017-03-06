@@ -3,8 +3,8 @@
 # Table name: funds
 #
 #  id         :integer          not null, primary key
-#  name       :string
-#  amount     :decimal(, )
+ # name       :string
+ # amount     :decimal(, )
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
