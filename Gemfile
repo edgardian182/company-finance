@@ -37,6 +37,8 @@ gem 'devise-i18n'
 gem 'cancan'
 
 gem 'annotate'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 gem "paperclip", "~> 5.0.0"
 gem 'aws-sdk', '~> 2.3'

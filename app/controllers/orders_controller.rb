@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     @tab = :orders
-
+    @orders = @orders.paginate(page: params[:page], per_page: 30)
   end
 
   def new
