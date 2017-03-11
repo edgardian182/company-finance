@@ -4,6 +4,7 @@ class ClientsController < ApplicationController
 
   def index
     @tab = :clients
+    @clients2 = @clients2 # Evita problema con paginate
     @clients = @clients.paginate(page: params[:page], per_page: 30)
   end
 

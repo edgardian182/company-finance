@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     @tab = :orders
+    @orders2 = @orders # Evita problema con paginate
     @orders = @orders.paginate(page: params[:page], per_page: 30)
   end
 

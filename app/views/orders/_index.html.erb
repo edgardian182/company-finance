@@ -7,13 +7,13 @@
       <div class="row" style="margin-top: 10px;">
         <div class="summary-box col-xs-4 text-center">
           <div class="summary-value" id="total">
-            <span style="color: #47FB5C"><%= number_to_currency(@orders.where(state: [2,3]).sum(:amount) - @orders.where(state: 2).sum(:debt)) %></span>
+            <span style="color: #47FB5C"><%= number_to_currency(@orders2.where(state: [2,3]).sum(:amount) - @orders2.where(state: 2).sum(:debt)) %></span>
           </div>
           <div class="summary-label" style="color: white">Ingresos</div>
         </div>
         <div class="summary-box col-xs-4 text-center">
           <div class="summary-value" id="deuda">
-            <span style="color: #FB4747"><%= number_to_currency(@orders.sum(:debt)) %></span>
+            <span style="color: #FB4747"><%= number_to_currency(@orders2.sum(:debt)) %></span>
           </div>
           <div class="summary-label" style="color: white">Deuda Acumulada</div>
         </div>
