@@ -19,8 +19,13 @@
         <% end %>
       </div>
 
-      <div class="col-xs-2">
+      <div class="col-xs-1">
         <%= link_to "All", clients_path(all: true), class: "btn btn-info" %>
+      </div>
+
+      <div class="col-xs-1 text-center">
+        <div class="summary-value" id="clients"><span style="color: #47E6FB"><%= @clients.count %></span></div>
+        <div class="summary-label" style="color: white">Clientes</div>
       </div>
 
       <div class="col-xs-2">
