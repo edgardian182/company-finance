@@ -151,6 +151,7 @@ class OrdersController < ApplicationController
 
   def date_filter
     date = Date.parse(params[:date_order])
-    @orders = @orders.order("date DESC").where("date BETWEEN ? AND ?", date.beginning_of_month, date.end_of_month)
+    # @orders = @orders.order("date DESC").where("date BETWEEN ? AND ?", date.beginning_of_month, date.end_of_month)
+    @orders = @orders.order("date DESC").where(date: date.beginning_of_month..date.end_of_month)
   end
 end

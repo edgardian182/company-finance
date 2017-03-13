@@ -79,18 +79,18 @@ class ClientsController < ApplicationController
 
     if cookies[:pedidos] && params[:pedidos]
       cookies.delete(:pedidos)
-      @clients = @clients.joins(:orders).group("orders.client_id").order("count(orders.client_id) ASC")
+      @clients = @clients.joins(:orders).group("orders.client_id, clients.id").order("count(orders.client_id) ASC")
     elsif params[:pedidos]
       cookies[:pedidos] = params[:pedidos]
-      @clients = @clients.joins(:orders).group("orders.client_id").order("count(orders.client_id) DESC")
+      @clients = @clients.joins(:orders).group("orders.client_id, clients.id").order("count(orders.client_id) DESC")
     end
 
     if cookies[:ultimo] && params[:ultimo]
       cookies.delete(:ultimo)
-      @clients = @clients.joins(:orders).group("orders.client_id").order("MAX(orders.date) ASC")
+      @clients = @clients.joins(:orders).group("orders.client_id, clients.id").order("MAX(orders.date) ASC")
     elsif params[:ultimo]
       cookies[:ultimo] = params[:ultimo]
-      @clients = @clients.joins(:orders).group("orders.client_id").order("MAX(orders.date) DESC")
+      @clients = @clients.joins(:orders).group("orders.client_id, clients.id").order("MAX(orders.date) DESC")
     end
 
     if params[:vendedor].present?
