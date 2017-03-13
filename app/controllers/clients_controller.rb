@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
 
   def index
     @tab = :clients
-    @clients2 = @clients # Evita problema con paginate
+    # @clients2
     @clients = @clients.paginate(page: params[:page], per_page: 30)
   end
 
@@ -65,8 +65,10 @@ class ClientsController < ApplicationController
   def set_clients
     if current_user.superadmin_role? || current_user.supervisor_role?
       @clients = Client.all
+      @clients2 = Client.all
     else
       @clients = Client.all.where(user: current_user)
+      @clients2 = Client.all.where(user: current_user)
     end
 
     if params[:all]
