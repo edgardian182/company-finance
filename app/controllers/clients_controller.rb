@@ -5,7 +5,13 @@ class ClientsController < ApplicationController
   def index
     @tab = :clients
     # @clients2
-    @clients = @clients.paginate(page: params[:page], per_page: 30)
+    # @clients = @clients.paginate(page: params[:page], per_page: 30)
+    @clients = @clients.page(params[:page] || 1).per_page(30)
+    render action: :index, layout: request.xhr? == nil
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
@@ -65,10 +71,10 @@ class ClientsController < ApplicationController
   def set_clients
     if current_user.superadmin_role? || current_user.supervisor_role?
       @clients = Client.all
-      @clients2 = Client.all
+      @clients2 = @clients
     else
       @clients = Client.all.where(user: current_user)
-      @clients2 = Client.all.where(user: current_user)
+      @clients2 = @clients
     end
 
     if params[:all]
@@ -98,9 +104,11 @@ class ClientsController < ApplicationController
     if params[:vendedor].present?
       cookies[:vendedor] = {value: params[:vendedor], expires: 1.hour.from_now}
       @clients = @clients.where(user_id: params[:vendedor].to_i);
+      @clients2 = @clients
       # @cookie_type = params[:type]
     elsif cookies[:vendedor]
       @clients = @clients.where(user_id: cookies[:vendedor].to_i);
+      @clients2 = @clients
       # @cookie_type = cookies[:type]
     end
 
