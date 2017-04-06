@@ -16,10 +16,18 @@
 #
 
 class Client < ApplicationRecord
+  before_save :capitalize_fields
+
   belongs_to :user
 
   has_many :orders, dependent: :destroy
 
   validates_presence_of :name, :lastname, :city
+
+  def capitalize_fields
+    self.name = self.name.capitalize
+    self.lastname = self.lastname.capitalize
+    self.city = self.city.capitalize
+  end
 
 end
