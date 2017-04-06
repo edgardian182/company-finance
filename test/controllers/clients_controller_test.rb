@@ -1,34 +1,20 @@
 require 'test_helper'
 
 class ClientsControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get clients_index_url
+
+  test "should get index, an admin user is required" do
+    sign_in users(:admin)  # Devise::Test::IntegrationHelpers method
+    get clients_path
     assert_response :success
+    assert_not_nil assigns(:clients)
   end
 
-  test "should get new" do
-    get clients_new_url
-    assert_response :success
-  end
-
-  test "should get create" do
-    get clients_create_url
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get clients_edit_url
-    assert_response :success
-  end
-
-  test "should get show" do
-    get clients_show_url
-    assert_response :success
-  end
-
-  test "should get destroy" do
-    get clients_destroy_url
-    assert_response :success
+  test "should create a client" do
+    sign_in users(:admin)
+    assert_difference "Client.count" do
+      post clients_path, params: {client: {name: "Rosa", lastname: "Acevedo", city: "Zapatoca" } }
+    end
+    assert_redirected_to clients_path
   end
 
 end

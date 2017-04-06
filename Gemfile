@@ -56,7 +56,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry-rails'
-  gem 'awesome_print'
+  gem 'awesome_print' #print Model instances in a readable way
+
+  gem 'minitest-reporters' #makes test results more readable
+  gem 'rails-controller-testing' #adds methods for controllers testing
 end
 
 group :development do

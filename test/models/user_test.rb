@@ -33,4 +33,9 @@ class UserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+
+  test "User should have a name" do
+    @user = User.new
+    assert_not @user.save
+  end
 end

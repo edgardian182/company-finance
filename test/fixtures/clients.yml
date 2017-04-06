@@ -17,22 +17,19 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  name: MyString
-  lastname: MyString
-  address: MyString
-  phone: 1
-  email: MyString
-  city: MyString
-  reference: MyString
+# <% 50.times do |n| %>
+#   user<%= n %>:
+#     name: <%= "user#{n}" %>
+#     email: <%= "user#{n}@example.com" %>
+# <% end %>
 
-two:
-  user: two
-  name: MyString
-  lastname: MyString
-  address: MyString
-  phone: 1
-  email: MyString
-  city: MyString
-  reference: MyString
+# Uncompleted client
+client1:
+  name: "Edgar"
+  user: admin
+
+client2:
+  name: "andres"
+  lastname: "acevedo"
+  city: "barranca"
+  user: admin
