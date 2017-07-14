@@ -4,27 +4,36 @@
   <div class="container">
     <div class="row">
 
+      <!-- **************************** SUMARY *********************** -->
       <div class="row" style="margin-top: 10px;">
+
         <div class="summary-box col-xs-4 text-center">
           <div class="summary-value" id="total">
             <span style="color: #47FB5C"><%= number_to_currency(@orders2.where(state: [2,3]).sum(:amount) - @orders2.where(state: 2).sum(:debt)) %></span>
           </div>
           <div class="summary-label" style="color: white">Ingresos</div>
         </div>
+
         <div class="summary-box col-xs-4 text-center">
           <div class="summary-value" id="deuda">
             <span style="color: #FB4747"><%= number_to_currency(@orders2.sum(:debt)) %></span>
           </div>
           <div class="summary-label" style="color: white">Deuda Acumulada</div>
         </div>
+
         <div class="summary-box col-xs-4 text-center">
           <div class="summary-value" id="transactions"><span style="color: #47E6FB"><%= @orders.count %></span></div>
           <div class="summary-label" style="color: white">Nº de Pedidos</div>
         </div>
+
       </div>
+      <!-- **************************** SUMARY END *********************** -->
+
 
       <br><br>
 
+
+      <!-- **************************** FILTERS *********************** -->
       <div class="row">
         <div class="col-xs-6">
           <%= form_tag orders_path, remote:true, method: :get, id:"order-lookup-form", autocomplete: :off do %>
@@ -90,16 +99,52 @@
               <% end %>
             </ul>
           </h4>
+
+
+          <h4 class="dropdown pull-right">
+            <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">
+              <% if params[:date_order] %>
+                <% date = Date.parse(params[:date_order]) %>
+                <%= Date::MONTHNAMES[date.month] %> <%= date.year %> <span class="caret"></span>
+              <% else %>
+               <%= Date::MONTHNAMES[Date.current.month] %> <%= Date.current.year %> <span class="caret"></span>
+              <% end %>
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+              <% if !@orders2.empty? %>
+                <% days = {} %>
+                <% @orders2.each do |order| %>
+
+                  <% if days[order.date.to_s].nil? %>
+                    <% days[order.date.to_s] = [order] %>
+                  <% else %>
+                    <% days[order.date.to_s].push(order) %>
+                  <% end %>
+
+                <% end %>
+                <% hash.each do |date2,order| %>
+                  <% date = Date.parse(date2) %>
+
+
+              <% 13.times.map {|i| (Date.today - i.month).beginning_of_month }.each do |m| %>
+                <!-- <li role="presentation"><a href="#"><%= Date::MONTHNAMES[m.month] %> <%= m.year %></a></li> -->
+                <li role="presentation">
+                  <%= link_to m.strftime("%B %Y"), orders_path(date_order: m), remote: true %>
+                </li>
+              <% end %>
+            </ul>
+          </h4>
         </div>
 
       </div>
+      <!-- **************************** FILTERS END *********************** -->
+
 
      <!--  <div class="col-xs-6 text-right">
         <%= link_to "<span class='glyphicon glyphicon-plus'></span> Generar pedido".html_safe, new_order_path, class: "btn btn-success", remote: true %>
       </div> -->
       <br>
-
-      <!-- <div align="center"><%= will_paginate previous_label: "Atras", next_label: "Siguiente" %></div> -->
 
 
 
@@ -117,7 +162,7 @@
         <% hash.each do |date2,order| %>
           <% date = Date.parse(date2) %>
 
-          <!-- <h3><%= Date::MONTHNAMES[date.month] %> <%= date.day %> de <%= date.year %></h3> -->
+
           <h3><%= date2 %></h3>
           <table id="orders-table" class="table table-hover" style="margin-top: 20px;">
             <thead>
@@ -140,7 +185,6 @@
               <% end %>
             </tbody>
           </table>
-          <!-- <div align="center"><%= will_paginate previous_label: "Atras", next_label: "Siguiente" %></div> -->
         <% end %>
       <% else %>
         <h2 class="text-center">No se han generado pedidos</h2>
@@ -151,7 +195,9 @@
 
 
 
+    <!-- METODO PAGINADO -->
 
+      <!-- <div align="center"><%= will_paginate previous_label: "Atras", next_label: "Siguiente" %></div> -->
 
       <!-- <table id="orders-table" class="table table-hover" style="margin-top: 20px;">
         <thead>

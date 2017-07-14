@@ -1,0 +1,32 @@
+<tr id="<%= client.id %>">
+
+  <td>
+    <div>
+      <span class="type"> <%= client.name %> <%= client.lastname %></span>
+    </div>
+  </td>
+  <td><%= client.phone %></td>
+  <td><%= client.address %></td>
+  <td class="text-center"><%= client.orders.count %></td>
+  <td>
+    <% if client.orders.count > 0 %>
+    <%= client.orders.last.date  %>
+    <% else %>
+    <%= "NN" %>
+    <% end %>
+  </td>
+  <td><%= client.user.name %> <%= client.user.lastname %></td>
+  <td>
+    <div>
+      <% deuda = 0 %>
+      <% client.orders.each{|o| deuda += o.debt } %>
+      <% if deuda > 0 %>
+        <%= "MORA" %>
+      <% else %>
+        <%= "OK" %>
+      <% end %>
+    </div>
+  </td>
+  <td><%= link_to "<span class='glyphicon glyphicon-shopping-cart'></span>".html_safe, new_order_path(params: {client_id: client.id}), remote: true %></td>
+
+</tr>

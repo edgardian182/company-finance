@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:edit,:show,:update,:destroy]
-  before_action :set_clients, only: [:index, :create, :update, :destroy]
+  before_action :set_clients, only: [:index, :create, :update, :destroy, :index2]
 
   def index
     @tab = :clients
@@ -8,6 +8,18 @@ class ClientsController < ApplicationController
     # @clients = @clients.paginate(page: params[:page], per_page: 30)
     @clients = @clients.page(params[:page] || 1).per_page(30)
     render action: :index, layout: request.xhr? == nil
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def index2
+    @tab = :clients
+    # @clients2
+    # @clients = @clients.paginate(page: params[:page], per_page: 30)
+    @clients = @clients.page(params[:page] || 1).per_page(15)
+    render action: :index2, layout: request.xhr? == nil
     respond_to do |format|
       format.html
       format.js
